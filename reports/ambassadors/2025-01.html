@@ -4,245 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orbisk Creator &amp; Ambassador Benchmark — January 2025</title>
-  <style>
-    /* ── Base (inlined from assets/css/report.css) ── */
-    :root {
-      --color-primary: #1a7a4a;
-      --color-accent: #f4b942;
-      --color-bg: #f9f9f7;
-      --color-surface: #ffffff;
-      --color-text: #1a1a1a;
-      --color-muted: #6b7280;
-      --color-border: #e5e7eb;
-      --font: 'Inter', system-ui, sans-serif;
-      --radius: 8px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: var(--font);
-      background: var(--color-bg);
-      color: var(--color-text);
-      line-height: 1.6;
-      padding: 2rem;
-    }
-    .report-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 2px solid var(--color-border);
-    }
-    .report-header h1 { font-size: 1.5rem; font-weight: 700; }
-    .report-header .period { color: var(--color-muted); font-size: 0.9rem; }
-    .section { margin-bottom: 2.5rem; }
-    .section h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--color-surface);
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--color-border);
-      font-size: 0.875rem;
-    }
-    th {
-      background: var(--color-bg);
-      text-align: left;
-      padding: 0.75rem 1rem;
-      font-weight: 600;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--color-muted);
-      border-bottom: 1px solid var(--color-border);
-    }
-    td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border); }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: var(--color-bg); }
-
-    /* ── Summary bar ── */
-    .summary-bar { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .summary-pill {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 999px;
-      padding: 0.35rem 1rem;
-      font-size: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .summary-pill strong { color: var(--color-primary); }
-
-    /* ── Tier filters ── */
-    .filter-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .filter-btn {
-      padding: 0.35rem 0.9rem;
-      border: 1px solid var(--color-border);
-      border-radius: 999px;
-      background: var(--color-surface);
-      color: var(--color-muted);
-      font-size: 0.78rem;
-      font-weight: 500;
-      cursor: pointer;
-      font-family: var(--font);
-      transition: all 0.15s;
-    }
-    .filter-btn:hover  { border-color: var(--color-primary); color: var(--color-primary); }
-    .filter-btn.active { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
-
-    /* ── Creator cards ── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 2.5rem;
-    }
-    .creator-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      transition: box-shadow 0.15s;
-    }
-    .creator-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
-    .creator-card.hidden { display: none; }
-    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
-    .card-identity { display: flex; gap: 0.75rem; align-items: flex-start; }
-    .creator-avatar {
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      background: var(--color-primary);
-      color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 0.95rem; flex-shrink: 0;
-    }
-    .creator-name    { font-weight: 700; font-size: 0.95rem; line-height: 1.2; }
-    .creator-role    { font-size: 0.75rem; color: var(--color-muted); margin-top: 0.1rem; }
-    .creator-company { font-size: 0.72rem; color: var(--color-muted); }
-
-    /* Tier badges */
-    .tier-badge {
-      font-size: 0.65rem; font-weight: 700;
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
-      text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
-    }
-    .tier-Nano  { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
-    .tier-Micro { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
-    .tier-Mid   { background: #fdf4ff; color: #9333ea; border: 1px solid #e9d5ff; }
-    .tier-Macro { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
-
-    /* Status badges */
-    .status-badge { font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600; }
-    .status-not  { background: #f3f4f6; color: var(--color-muted); }
-    .status-sent { background: #fefce8; color: #854d0e; }
-    .status-live { background: #dcfce7; color: #15803d; }
-
-    /* Stat row */
-    .card-stats {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;
-      padding: 0.75rem 0;
-      border-top: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
-    }
-    .stat { text-align: center; }
-    .stat .s-val { font-size: 1.05rem; font-weight: 700; }
-    .stat .s-lbl { font-size: 0.65rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.1rem; }
-
-    /* Fit score */
-    .fit-row { display: flex; align-items: center; gap: 0.75rem; }
-    .fit-label { font-size: 0.75rem; color: var(--color-muted); white-space: nowrap; }
-    .fit-track { flex: 1; height: 7px; background: var(--color-border); border-radius: 4px; overflow: hidden; }
-    .fit-fill  { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--color-primary), #2db36e); }
-    .fit-score-val { font-size: 0.85rem; font-weight: 700; color: var(--color-primary); white-space: nowrap; }
-
-    /* Topic chips */
-    .topic-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-    .topic-chip {
-      font-size: 0.68rem; padding: 0.15rem 0.5rem;
-      border-radius: 4px; font-weight: 500;
-      background: #f3f4f6; color: var(--color-muted);
-    }
-    .topic-chip.match { background: #dcfce7; color: #15803d; }
-    .fit-notes { font-size: 0.78rem; color: var(--color-muted); line-height: 1.5; }
-
-    /* ── Topic coverage matrix ── */
-    .matrix-wrap { overflow-x: auto; }
-    .coverage-table { min-width: 560px; }
-    .coverage-table td, .coverage-table th { text-align: center; padding: 0.6rem 0.75rem; }
-    .coverage-table th:first-child,
-    .coverage-table td:first-child { text-align: left; font-weight: 600; font-size: 0.8rem; }
-    .coverage-dot   { display: inline-block; width: 18px; height: 18px; background: var(--color-primary); border-radius: 50%; opacity: 0.85; }
-    .coverage-empty { display: inline-block; width: 18px; height: 18px; background: var(--color-border); border-radius: 50%; }
-    .theme-header   { font-size: 0.72rem; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--color-text); max-width: 100px; line-height: 1.3; }
-
-    /* ── Outreach ranking ── */
-    .ranking-list { display: flex; flex-direction: column; gap: 0.75rem; }
-    .rank-row {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 1rem 1.25rem;
-      display: flex; align-items: center; gap: 1.25rem;
-    }
-    .rank-number { font-size: 1.5rem; font-weight: 700; color: var(--color-border); width: 2rem; flex-shrink: 0; text-align: center; }
-    .rank-row:nth-child(1) .rank-number { color: #f4b942; }
-    .rank-row:nth-child(2) .rank-number { color: #9ca3af; }
-    .rank-row:nth-child(3) .rank-number { color: #b45309; }
-    .rank-info { flex: 1; }
-    .rank-name { font-weight: 700; font-size: 0.9rem; }
-    .rank-sub  { font-size: 0.78rem; color: var(--color-muted); margin-top: 0.1rem; }
-    .rank-rationale { font-size: 0.78rem; color: var(--color-muted); margin-top: 0.3rem; line-height: 1.5; }
-    .rank-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; flex-shrink: 0; }
-    .rank-score { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); }
-    .rank-score-lbl { font-size: 0.65rem; color: var(--color-muted); text-transform: uppercase; }
-  </style>
 </head>
-<body>
-
-<header class="report-header">
-  <div>
-    <h1>Creator &amp; Ambassador Benchmark</h1>
-    <div class="period">January 2025 · Ambassador Benchmark</div>
-  </div>
-</header>
-
-<div class="summary-bar" id="summary-bar"></div>
-
-<div class="section">
-  <h2>Creator Shortlist</h2>
-  <div class="filter-row" id="tier-filters">
-    <button class="filter-btn active" data-tier="all">All tiers</button>
-    <button class="filter-btn" data-tier="Nano">Nano</button>
-    <button class="filter-btn" data-tier="Micro">Micro</button>
-    <button class="filter-btn" data-tier="Mid">Mid</button>
-    <button class="filter-btn" data-tier="Macro">Macro</button>
-  </div>
-  <div class="cards-grid" id="cards-grid"></div>
-</div>
-
-<div class="section">
-  <h2>Topic Coverage</h2>
-  <div class="matrix-wrap">
-    <table class="coverage-table">
-      <thead id="coverage-head"></thead>
-      <tbody id="coverage-body"></tbody>
-    </table>
-  </div>
-</div>
-
-<div class="section">
-  <h2>Outreach Priority Ranking</h2>
-  <div class="ranking-list" id="ranking-list"></div>
-</div>
 
 <script>
-const data = {
+const DATA = {
   "period": "2025-01",
   "themes": ["Food Waste", "Hospitality Sustainability", "Food Tech", "Circular Economy"],
   "creators": [
@@ -344,129 +109,276 @@ const data = {
     }
   ]
 };
+</script>
 
-(() => {
-  const creators = data.creators;
-  const themes   = data.themes;
-  const fmt = n => n >= 1000 ? (n / 1000).toFixed(1) + 'k' : n;
+<style>
+  :root {
+    --color-primary: #1a7a4a;
+    --color-accent:  #f4b942;
+    --color-bg:      #f9f9f7;
+    --color-surface: #ffffff;
+    --color-text:    #1a1a1a;
+    --color-muted:   #6b7280;
+    --color-border:  #e5e7eb;
+    --font: 'Inter', system-ui, sans-serif;
+    --radius: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--color-bg); color: var(--color-text); line-height: 1.6; padding: 2rem; }
+
+  /* Header */
+  .report-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--color-border); }
+  .report-header h1 { font-size: 1.5rem; font-weight: 700; }
+  .report-header .period { color: var(--color-muted); font-size: 0.9rem; }
+
+  /* Sections */
+  .section { margin-bottom: 2.5rem; }
+  .section h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
+
+  /* Table base */
+  table { width: 100%; border-collapse: collapse; background: var(--color-surface); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--color-border); font-size: 0.875rem; }
+  th { background: var(--color-bg); text-align: left; padding: 0.75rem 1rem; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-muted); border-bottom: 1px solid var(--color-border); }
+  td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--color-bg); }
+
+  /* Summary pills */
+  .summary-bar { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .summary-pill { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 999px; padding: 0.35rem 1rem; font-size: 0.8rem; display: flex; align-items: center; gap: 0.4rem; }
+  .summary-pill strong { color: var(--color-primary); }
+
+  /* Tier filter buttons */
+  .filter-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .filter-btn { padding: 0.35rem 0.9rem; border: 1px solid var(--color-border); border-radius: 999px; background: var(--color-surface); color: var(--color-muted); font-size: 0.78rem; font-weight: 500; cursor: pointer; font-family: var(--font); transition: all 0.15s; }
+  .filter-btn:hover  { border-color: var(--color-primary); color: var(--color-primary); }
+  .filter-btn.active { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+
+  /* Creator cards */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
+  .creator-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; transition: box-shadow 0.15s; }
+  .creator-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+  .creator-card.hidden { display: none; }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
+  .card-identity { display: flex; gap: 0.75rem; align-items: flex-start; }
+  .creator-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; flex-shrink: 0; }
+  .creator-name    { font-weight: 700; font-size: 0.95rem; line-height: 1.2; }
+  .creator-role    { font-size: 0.75rem; color: var(--color-muted); margin-top: 0.1rem; }
+  .creator-company { font-size: 0.72rem; color: var(--color-muted); }
+
+  /* Badges */
+  .tier-badge { font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+  .tier-Nano  { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+  .tier-Micro { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+  .tier-Mid   { background: #fdf4ff; color: #9333ea; border: 1px solid #e9d5ff; }
+  .tier-Macro { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
+  .status-badge { font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600; }
+  .status-not  { background: #f3f4f6; color: var(--color-muted); }
+  .status-sent { background: #fefce8; color: #854d0e; }
+  .status-live { background: #dcfce7; color: #15803d; }
+
+  /* Card stats */
+  .card-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; padding: 0.75rem 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+  .stat { text-align: center; }
+  .stat .s-val { font-size: 1.05rem; font-weight: 700; }
+  .stat .s-lbl { font-size: 0.65rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.1rem; }
+
+  /* Fit score bar */
+  .fit-row { display: flex; align-items: center; gap: 0.75rem; }
+  .fit-label { font-size: 0.75rem; color: var(--color-muted); white-space: nowrap; }
+  .fit-track { flex: 1; height: 7px; background: var(--color-border); border-radius: 4px; overflow: hidden; }
+  .fit-fill  { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--color-primary), #2db36e); }
+  .fit-score-val { font-size: 0.85rem; font-weight: 700; color: var(--color-primary); white-space: nowrap; }
+
+  /* Topic chips */
+  .topic-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .topic-chip { font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 500; background: #f3f4f6; color: var(--color-muted); }
+  .topic-chip.match { background: #dcfce7; color: #15803d; }
+  .fit-notes { font-size: 0.78rem; color: var(--color-muted); line-height: 1.5; }
+
+  /* Coverage matrix */
+  .matrix-wrap { overflow-x: auto; }
+  .coverage-table { min-width: 560px; }
+  .coverage-table td, .coverage-table th { text-align: center; padding: 0.6rem 0.75rem; }
+  .coverage-table th:first-child, .coverage-table td:first-child { text-align: left; font-weight: 600; font-size: 0.8rem; }
+  .coverage-dot   { display: inline-block; width: 18px; height: 18px; background: var(--color-primary); border-radius: 50%; opacity: 0.85; }
+  .coverage-empty { display: inline-block; width: 18px; height: 18px; background: var(--color-border); border-radius: 50%; }
+  .theme-header   { font-size: 0.72rem; font-weight: 600; color: var(--color-text); max-width: 100px; line-height: 1.3; text-transform: none; letter-spacing: 0; }
+
+  /* Ranking list */
+  .ranking-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .rank-row { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1.25rem; }
+  .rank-number { font-size: 1.5rem; font-weight: 700; color: var(--color-border); width: 2rem; flex-shrink: 0; text-align: center; }
+  .rank-row:nth-child(1) .rank-number { color: #f4b942; }
+  .rank-row:nth-child(2) .rank-number { color: #9ca3af; }
+  .rank-row:nth-child(3) .rank-number { color: #b45309; }
+  .rank-info { flex: 1; }
+  .rank-name { font-weight: 700; font-size: 0.9rem; }
+  .rank-sub  { font-size: 0.78rem; color: var(--color-muted); margin-top: 0.1rem; }
+  .rank-rationale { font-size: 0.78rem; color: var(--color-muted); margin-top: 0.3rem; line-height: 1.5; }
+  .rank-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; flex-shrink: 0; }
+  .rank-score { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); }
+  .rank-score-lbl { font-size: 0.65rem; color: var(--color-muted); text-transform: uppercase; }
+</style>
+
+<body>
+
+<header class="report-header">
+  <div>
+    <h1>Creator &amp; Ambassador Benchmark</h1>
+    <div class="period">January 2025 · Ambassador Benchmark</div>
+  </div>
+</header>
+
+<div class="summary-bar" id="summary-bar"></div>
+
+<div class="section">
+  <h2>Creator Shortlist</h2>
+  <div class="filter-row" id="tier-filters">
+    <button class="filter-btn active" data-tier="all">All tiers</button>
+    <button class="filter-btn" data-tier="Nano">Nano</button>
+    <button class="filter-btn" data-tier="Micro">Micro</button>
+    <button class="filter-btn" data-tier="Mid">Mid</button>
+    <button class="filter-btn" data-tier="Macro">Macro</button>
+  </div>
+  <div class="cards-grid" id="cards-grid"></div>
+</div>
+
+<div class="section">
+  <h2>Topic Coverage</h2>
+  <div class="matrix-wrap">
+    <table class="coverage-table">
+      <thead id="coverage-head"></thead>
+      <tbody id="coverage-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Outreach Priority Ranking</h2>
+  <div class="ranking-list" id="ranking-list"></div>
+</div>
+
+<script>
+  const creators = DATA.creators;
+  const themes   = DATA.themes;
+  const fmt = n => n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
   const statusClass = s => s === 'Live' ? 'status-live' : s === 'Contacted' ? 'status-sent' : 'status-not';
 
-  /* ── Summary bar ── */
+  /* Summary bar */
   const totalFollowers = creators.reduce((s, c) => s + c.followers, 0);
   const avgEng = (creators.reduce((s, c) => s + c.engagement_rate, 0) / creators.length).toFixed(1);
   const tiers  = [...new Set(creators.map(c => c.tier))];
-  document.getElementById('summary-bar').innerHTML = `
-    <div class="summary-pill"><strong>${creators.length}</strong> creators shortlisted</div>
-    <div class="summary-pill">Combined reach <strong>${(totalFollowers / 1000).toFixed(0)}k</strong></div>
-    <div class="summary-pill">Avg engagement rate <strong>${avgEng}%</strong></div>
-    <div class="summary-pill">Tiers: <strong>${tiers.join(', ')}</strong></div>
-  `;
+  document.getElementById('summary-bar').innerHTML =
+    `<div class="summary-pill"><strong>${creators.length}</strong> creators shortlisted</div>` +
+    `<div class="summary-pill">Combined reach <strong>${(totalFollowers / 1000).toFixed(0)}k</strong></div>` +
+    `<div class="summary-pill">Avg engagement rate <strong>${avgEng}%</strong></div>` +
+    `<div class="summary-pill">Tiers: <strong>${tiers.join(', ')}</strong></div>`;
 
-  /* ── Creator cards ── */
+  /* Creator cards */
   const grid = document.getElementById('cards-grid');
-  creators.forEach(c => {
-    const initials = c.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+  creators.forEach(function(c) {
+    const initials = c.name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
     const card = document.createElement('div');
     card.className = 'creator-card';
     card.dataset.tier = c.tier;
-    card.innerHTML = `
-      <div class="card-top">
-        <div class="card-identity">
-          <div class="creator-avatar">${initials}</div>
-          <div>
-            <div class="creator-name">${c.name}</div>
-            <div class="creator-role">${c.role}</div>
-            <div class="creator-company">${c.company}</div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.35rem">
-          <span class="tier-badge tier-${c.tier}">${c.tier}</span>
-          <span class="status-badge ${statusClass(c.outreach_status)}">${c.outreach_status}</span>
-        </div>
-      </div>
-      <div class="card-stats">
-        <div class="stat"><div class="s-val">${fmt(c.followers)}</div><div class="s-lbl">Followers</div></div>
-        <div class="stat"><div class="s-val">${c.engagement_rate}%</div><div class="s-lbl">Eng. Rate</div></div>
-        <div class="stat"><div class="s-val">${fmt(c.avg_impressions_per_post)}</div><div class="s-lbl">Avg Impr.</div></div>
-      </div>
-      <div class="fit-row">
-        <span class="fit-label">Fit score</span>
-        <div class="fit-track"><div class="fit-fill" style="width:${c.fit_score * 10}%"></div></div>
-        <span class="fit-score-val">${c.fit_score} / 10</span>
-      </div>
-      <div class="topic-chips">
-        ${themes.map(t => `<span class="topic-chip ${c.topics.includes(t) ? 'match' : ''}">${t}</span>`).join('')}
-      </div>
-      <div class="fit-notes">${c.fit_notes}</div>
-    `;
+    card.innerHTML =
+      '<div class="card-top">' +
+        '<div class="card-identity">' +
+          '<div class="creator-avatar">' + initials + '</div>' +
+          '<div>' +
+            '<div class="creator-name">' + c.name + '</div>' +
+            '<div class="creator-role">' + c.role + '</div>' +
+            '<div class="creator-company">' + c.company + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.35rem">' +
+          '<span class="tier-badge tier-' + c.tier + '">' + c.tier + '</span>' +
+          '<span class="status-badge ' + statusClass(c.outreach_status) + '">' + c.outreach_status + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="card-stats">' +
+        '<div class="stat"><div class="s-val">' + fmt(c.followers) + '</div><div class="s-lbl">Followers</div></div>' +
+        '<div class="stat"><div class="s-val">' + c.engagement_rate + '%</div><div class="s-lbl">Eng. Rate</div></div>' +
+        '<div class="stat"><div class="s-val">' + fmt(c.avg_impressions_per_post) + '</div><div class="s-lbl">Avg Impr.</div></div>' +
+      '</div>' +
+      '<div class="fit-row">' +
+        '<span class="fit-label">Fit score</span>' +
+        '<div class="fit-track"><div class="fit-fill" style="width:' + (c.fit_score * 10) + '%"></div></div>' +
+        '<span class="fit-score-val">' + c.fit_score + ' / 10</span>' +
+      '</div>' +
+      '<div class="topic-chips">' +
+        themes.map(function(t) {
+          return '<span class="topic-chip' + (c.topics.indexOf(t) !== -1 ? ' match' : '') + '">' + t + '</span>';
+        }).join('') +
+      '</div>' +
+      '<div class="fit-notes">' + c.fit_notes + '</div>';
     grid.appendChild(card);
   });
 
-  /* ── Tier filter ── */
-  document.getElementById('tier-filters').addEventListener('click', e => {
-    const btn = e.target.closest('.filter-btn');
+  /* Tier filter */
+  document.getElementById('tier-filters').addEventListener('click', function(e) {
+    var btn = e.target.closest('.filter-btn');
     if (!btn) return;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
-    const tier = btn.dataset.tier;
-    document.querySelectorAll('.creator-card').forEach(card => {
+    var tier = btn.dataset.tier;
+    document.querySelectorAll('.creator-card').forEach(function(card) {
       card.classList.toggle('hidden', tier !== 'all' && card.dataset.tier !== tier);
     });
   });
 
-  /* ── Topic coverage matrix ── */
-  document.getElementById('coverage-head').innerHTML = `<tr>
-    <th style="text-align:left">Creator</th>
-    ${themes.map(t => `<th><div class="theme-header">${t}</div></th>`).join('')}
-    <th><div class="theme-header">Coverage</div></th>
-  </tr>`;
+  /* Topic coverage matrix */
+  document.getElementById('coverage-head').innerHTML =
+    '<tr><th style="text-align:left">Creator</th>' +
+    themes.map(function(t) { return '<th><div class="theme-header">' + t + '</div></th>'; }).join('') +
+    '<th><div class="theme-header">Coverage</div></th></tr>';
 
-  const tbody = document.getElementById('coverage-body');
-  creators.forEach(c => {
-    const coverCount = themes.filter(t => c.topics.includes(t)).length;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${c.name}</td>
-      ${themes.map(t => `<td>${c.topics.includes(t) ? '<span class="coverage-dot"></span>' : '<span class="coverage-empty"></span>'}</td>`).join('')}
-      <td style="font-weight:600;font-size:0.8rem;color:var(--color-primary)">${coverCount}/${themes.length}</td>
-    `;
+  var tbody = document.getElementById('coverage-body');
+  creators.forEach(function(c) {
+    var coverCount = themes.filter(function(t) { return c.topics.indexOf(t) !== -1; }).length;
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + c.name + '</td>' +
+      themes.map(function(t) {
+        return '<td>' + (c.topics.indexOf(t) !== -1
+          ? '<span class="coverage-dot"></span>'
+          : '<span class="coverage-empty"></span>') + '</td>';
+      }).join('') +
+      '<td style="font-weight:600;font-size:0.8rem;color:var(--color-primary)">' + coverCount + '/' + themes.length + '</td>';
     tbody.appendChild(tr);
   });
 
-  const totals = document.createElement('tr');
+  var totals = document.createElement('tr');
   totals.style.borderTop = '2px solid var(--color-border)';
-  totals.innerHTML = `
-    <td style="font-size:0.72rem;color:var(--color-muted);font-weight:600">Creators covering</td>
-    ${themes.map(t => {
-      const n = creators.filter(c => c.topics.includes(t)).length;
-      return `<td style="font-size:0.8rem;font-weight:700;color:var(--color-text)">${n}</td>`;
-    }).join('')}
-    <td></td>
-  `;
+  totals.innerHTML =
+    '<td style="font-size:0.72rem;color:var(--color-muted);font-weight:600">Creators covering</td>' +
+    themes.map(function(t) {
+      var n = creators.filter(function(c) { return c.topics.indexOf(t) !== -1; }).length;
+      return '<td style="font-size:0.8rem;font-weight:700;color:var(--color-text)">' + n + '</td>';
+    }).join('') +
+    '<td></td>';
   tbody.appendChild(totals);
 
-  /* ── Outreach priority ranking ── */
-  const ranked = [...creators].sort((a, b) => b.fit_score - a.fit_score);
-  const list = document.getElementById('ranking-list');
-  ranked.forEach((c, i) => {
-    const row = document.createElement('div');
+  /* Outreach priority ranking */
+  var ranked = creators.slice().sort(function(a, b) { return b.fit_score - a.fit_score; });
+  var list = document.getElementById('ranking-list');
+  ranked.forEach(function(c, i) {
+    var row = document.createElement('div');
     row.className = 'rank-row';
-    row.innerHTML = `
-      <div class="rank-number">${i + 1}</div>
-      <div class="rank-info">
-        <div class="rank-name">${c.name}</div>
-        <div class="rank-sub">${c.role} · ${c.company} · <span class="tier-badge tier-${c.tier}">${c.tier}</span></div>
-        <div class="rank-rationale">${c.fit_notes}</div>
-      </div>
-      <div class="rank-right">
-        <span class="rank-score">${c.fit_score}</span>
-        <span class="rank-score-lbl">fit score</span>
-        <span class="status-badge ${statusClass(c.outreach_status)}">${c.outreach_status}</span>
-      </div>
-    `;
+    row.innerHTML =
+      '<div class="rank-number">' + (i + 1) + '</div>' +
+      '<div class="rank-info">' +
+        '<div class="rank-name">' + c.name + '</div>' +
+        '<div class="rank-sub">' + c.role + ' · ' + c.company + ' · <span class="tier-badge tier-' + c.tier + '">' + c.tier + '</span></div>' +
+        '<div class="rank-rationale">' + c.fit_notes + '</div>' +
+      '</div>' +
+      '<div class="rank-right">' +
+        '<span class="rank-score">' + c.fit_score + '</span>' +
+        '<span class="rank-score-lbl">fit score</span>' +
+        '<span class="status-badge ' + statusClass(c.outreach_status) + '">' + c.outreach_status + '</span>' +
+      '</div>';
     list.appendChild(row);
   });
-})();
 </script>
 
 </body>
