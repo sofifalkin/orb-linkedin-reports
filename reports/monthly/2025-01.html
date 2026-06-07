@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orbisk LinkedIn Report — January 2025</title>
+  <title>Orbisk LinkedIn Report — Company Page</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
+<!-- ═══════════════════════════════════════════════
+     DATA: January 2025 monthly report
+════════════════════════════════════════════════ -->
 <script>
-const DATA = {
+const DATA_JAN = {
   "period": "2025-01",
   "page_metrics": {
     "followers_total": 4821,
@@ -20,297 +23,230 @@ const DATA = {
     "engagement_rate": 3.8
   },
   "top_posts": [
-    {
-      "date": "2025-01-13",
-      "text": "500 tonnes of food waste prevented across our customer network — here's what that looks like in practice.",
-      "impressions": 14200,
-      "reactions": 387,
-      "comments": 54,
-      "shares": 41,
-      "engagement_rate": 3.4
-    },
-    {
-      "date": "2025-01-22",
-      "text": "A hotel kitchen cut food waste by 42% in 6 months using Orbisk. The numbers speak for themselves.",
-      "impressions": 11800,
-      "reactions": 298,
-      "comments": 37,
-      "shares": 29,
-      "engagement_rate": 3.1
-    },
-    {
-      "date": "2025-01-08",
-      "text": "Proud to announce our new partnership with a leading European hospitality group.",
-      "impressions": 9650,
-      "reactions": 241,
-      "comments": 45,
-      "shares": 22,
-      "engagement_rate": 3.2
-    },
-    {
-      "date": "2025-01-29",
-      "text": "2025 is the year B2B sustainability tech gets serious. Here's how Orbisk is positioning for what's next.",
-      "impressions": 8100,
-      "reactions": 189,
-      "comments": 31,
-      "shares": 18,
-      "engagement_rate": 2.9
-    },
-    {
-      "date": "2025-01-06",
-      "text": "1 in 3 meals produced globally never gets eaten. At Orbisk we're turning that stat into a solvable problem.",
-      "impressions": 7240,
-      "reactions": 156,
-      "comments": 24,
-      "shares": 14,
-      "engagement_rate": 2.7
-    }
+    { "date": "2025-01-13", "text": "500 tonnes of food waste prevented across our customer network — here's what that looks like in practice.", "impressions": 14200, "reactions": 387, "comments": 54, "shares": 41, "engagement_rate": 3.4 },
+    { "date": "2025-01-22", "text": "A hotel kitchen cut food waste by 42% in 6 months using Orbisk. The numbers speak for themselves.", "impressions": 11800, "reactions": 298, "comments": 37, "shares": 29, "engagement_rate": 3.1 },
+    { "date": "2025-01-08", "text": "Proud to announce our new partnership with a leading European hospitality group.", "impressions": 9650, "reactions": 241, "comments": 45, "shares": 22, "engagement_rate": 3.2 },
+    { "date": "2025-01-29", "text": "2025 is the year B2B sustainability tech gets serious. Here's how Orbisk is positioning for what's next.", "impressions": 8100, "reactions": 189, "comments": 31, "shares": 18, "engagement_rate": 2.9 },
+    { "date": "2025-01-06", "text": "1 in 3 meals produced globally never gets eaten. At Orbisk we're turning that stat into a solvable problem.", "impressions": 7240, "reactions": 156, "comments": 24, "shares": 14, "engagement_rate": 2.7 }
+  ]
+};
+</script>
+
+<!-- ═══════════════════════════════════════════════
+     DATA: Audit baseline May 2025 – May 2026
+════════════════════════════════════════════════ -->
+<script>
+const DATA_AUDIT = {
+  "period": "May 2025 – May 2026",
+  "snapshot": [
+    { "label": "Posts Analysed",          "value": "67",   "sub": "May 2025 – May 2026" },
+    { "label": "Total Reactions",          "value": "2,315","sub": "across all posts" },
+    { "label": "External Reactions",       "value": "1,690","sub": "non-team members" },
+    { "label": "Median Engagement",        "value": "31",   "sub": "reactions per post" },
+    { "label": "Top 10% Posts Avg",        "value": "87",   "sub": "reactions per post" },
+    { "label": "Insightful Reaction Rate", "value": "1.2%", "sub": "of total reactions" }
+  ],
+  "engagement_distribution": [
+    { "tier": "Top 10%",    "posts": 7,  "avg": 87, "label": "Spike content",          "pct": 100 },
+    { "tier": "Middle 50%", "posts": 34, "avg": 46, "label": "Consistent performers",  "pct": 53  },
+    { "tier": "Bottom 40%", "posts": 27, "avg": 19, "label": "Low-effort content",      "pct": 22  }
+  ],
+  "format_performance": [
+    { "format": "Video",               "posts": 11, "avg": 47.4, "note": "Best performer",  "highlight": true  },
+    { "format": "Image",               "posts": 26, "avg": 42.2, "note": "Workhorse",        "highlight": false },
+    { "format": "Document / Carousel", "posts": 18, "avg": 37.8, "note": "Inconsistent",     "highlight": false },
+    { "format": "Article link",        "posts": 6,  "avg": 28.2, "note": "Eliminate",        "highlight": false },
+    { "format": "Text only",           "posts": 6,  "avg": 23.3, "note": "Weakest",          "highlight": false }
+  ],
+  "monthly_trend": [
+    { "month": "Sep 2025", "avg": 44.3, "posts": 6  },
+    { "month": "Oct 2025", "avg": 55.8, "posts": 9,  "best": true  },
+    { "month": "Nov 2025", "avg": 41.3, "posts": 3  },
+    { "month": "Dec 2025", "avg": 47.2, "posts": 5  },
+    { "month": "Jan 2026", "avg": 40.6, "posts": 14 },
+    { "month": "Feb 2026", "avg": 24.3, "posts": 14, "worst": true },
+    { "month": "Mar 2026", "avg": 45.2, "posts": 5  },
+    { "month": "Apr 2026", "avg": 32.6, "posts": 10 }
+  ],
+  "day_of_week": [
+    { "day": "Monday",    "avg": 37.5, "posts": 19 },
+    { "day": "Tuesday",   "avg": 36.5, "posts": 18 },
+    { "day": "Wednesday", "avg": 51.2, "posts": 13, "best": true },
+    { "day": "Thursday",  "avg": 34.5, "posts": 11 },
+    { "day": "Friday",    "avg": 32.3, "posts": 6  }
+  ],
+  "findings": [
+    { "n": 1, "title": "Broadcasting, not conversing",    "body": "39% of posts get zero comments. The channel speaks at the audience, not with them." },
+    { "n": 2, "title": "ICP is present and silent",       "body": "Jo + Eva + Morgan = 36% of external reactions but zero activation. High-value contacts are watching but not engaging." },
+    { "n": 3, "title": "Customer proof almost absent",    "body": "Only 1 customer story in 67 posts. Social proof is the highest-converting content type for B2B — it's being left on the table." },
+    { "n": 4, "title": "AI framing attracts the wrong audience", "body": "Reframe from capability ('we use AI') to outcome ('hotels cut waste by 42%'). The former attracts tech followers; the latter attracts buyers." },
+    { "n": 5, "title": "Format choices not data-driven", "body": "Video averages 47.4 reactions but makes up only 16% of posts. Text-only posts average 23.3 but are over-used relative to their performance." },
+    { "n": 6, "title": "Accor webinar post is the strategic template", "body": "Named customer + specific topic + invitation to engage = the formula. Every post should be written against this template." },
+    { "n": 7, "title": "October proved narrative sequencing works", "body": "3 posts in October averaged 84 reactions each. Sequencing around a theme outperforms one-off content." },
+    { "n": 8, "title": "Three quick wins available now", "body": "Replace #orbisk (low signal), stop posting article links (28.2 avg — lowest format), and protect Wednesdays (51.2 avg — best day by far)." }
   ]
 };
 </script>
 
 <style>
   :root {
-    --forest:      #255653;
-    --night:       #1F4D4A;
-    --cream:       #FAF6EB;
-    --orange:      #F16622;
-    --lime:        #5FC433;
-    --honey:       #FFC963;
-    --text:        #1a1a1a;
-    --muted:       #5a6a68;
-    --border:      #dde8e6;
-    --font:        'Poppins', system-ui, sans-serif;
-    --radius:      10px;
+    --forest:  #255653;
+    --night:   #1F4D4A;
+    --cream:   #FAF6EB;
+    --orange:  #F16622;
+    --lime:    #5FC433;
+    --honey:   #FFC963;
+    --text:    #1a1a1a;
+    --muted:   #5a6a68;
+    --border:  #dde8e6;
+    --surface: #ffffff;
+    --font:    'Poppins', system-ui, sans-serif;
+    --radius:  10px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--cream); color: var(--text); line-height: 1.6; }
 
-  body {
-    font-family: var(--font);
-    background: var(--cream);
-    color: var(--text);
-    line-height: 1.6;
-  }
+  /* ── Top nav (report switcher) ── */
+  .top-nav { background: var(--night); padding: 0 2.5rem; display: flex; align-items: center; }
+  .top-nav .nav-logo { font-size: 0.8rem; font-weight: 700; color: #fff; letter-spacing: 0.08em; text-transform: uppercase; padding: 1rem 1.5rem 1rem 0; border-right: 1px solid rgba(255,255,255,0.12); margin-right: 0.5rem; white-space: nowrap; }
+  .top-nav a { display: inline-block; padding: 1rem 1.1rem; font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.6); text-decoration: none; border-bottom: 3px solid transparent; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
+  .top-nav a:hover  { color: #fff; border-bottom-color: rgba(255,255,255,0.35); }
+  .top-nav a.active { color: #fff; border-bottom-color: var(--orange); font-weight: 600; }
 
-  /* ── Navigation ── */
-  .top-nav {
-    background: var(--night);
+  /* ── Tab bar (view switcher within Company Page) ── */
+  .tab-bar {
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
     padding: 0 2.5rem;
     display: flex;
-    align-items: center;
+    gap: 0;
   }
-  .top-nav .nav-logo {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 1rem 1.5rem 1rem 0;
-    border-right: 1px solid rgba(255,255,255,0.12);
-    margin-right: 0.5rem;
-    white-space: nowrap;
-  }
-  .top-nav a {
-    display: inline-block;
-    padding: 1rem 1.1rem;
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: rgba(255,255,255,0.6);
-    text-decoration: none;
+  .tab-bar button {
+    padding: 0.85rem 1.5rem;
+    font-family: var(--font);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--muted);
+    background: none;
+    border: none;
     border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    cursor: pointer;
     transition: color 0.15s, border-color 0.15s;
     white-space: nowrap;
   }
-  .top-nav a:hover  { color: #fff; border-bottom-color: rgba(255,255,255,0.35); }
-  .top-nav a.active { color: #fff; border-bottom-color: var(--orange); font-weight: 600; }
+  .tab-bar button:hover  { color: var(--forest); }
+  .tab-bar button.active { color: var(--forest); border-bottom-color: var(--orange); }
+
+  /* ── Tab panels ── */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
 
   /* ── Page shell ── */
   .page { padding: 2.5rem; max-width: 1100px; margin: 0 auto; }
 
   /* ── Report header ── */
-  .report-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 2px solid var(--border);
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .report-header h1 {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: var(--forest);
-    line-height: 1.15;
-  }
-  .report-header h1 span {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 0.3rem;
-  }
-  .report-badge {
-    background: var(--forest);
-    color: #fff;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.35rem 0.9rem;
-    border-radius: 999px;
-  }
-
-  /* ── KPI hero ── */
-  .kpi-hero {
-    background: var(--forest);
-    border-radius: var(--radius);
-    padding: 2rem 2.5rem;
-    margin-bottom: 2.5rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 0;
-  }
-  .kpi-card {
-    padding: 1rem 1.25rem;
-    border-right: 1px solid rgba(255,255,255,0.1);
-  }
-  .kpi-card:last-child { border-right: none; }
-  .kpi-card .kpi-label {
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 0.5rem;
-  }
-  .kpi-card .kpi-value {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: #fff;
-    line-height: 1;
-  }
-  .kpi-card .kpi-sub {
-    font-size: 0.72rem;
-    font-weight: 500;
-    margin-top: 0.4rem;
-  }
-  .kpi-card .kpi-sub.up   { color: var(--lime); }
-  .kpi-card .kpi-sub.neutral { color: rgba(255,255,255,0.45); }
+  .report-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--border); gap: 1rem; flex-wrap: wrap; }
+  .report-header h1 { font-size: 1.75rem; font-weight: 800; color: var(--forest); line-height: 1.15; }
+  .report-header h1 span { display: block; font-size: 0.8rem; font-weight: 500; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .report-badge { background: var(--forest); color: #fff; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 999px; white-space: nowrap; }
+  .report-badge.audit { background: var(--orange); }
 
   /* ── Section headings ── */
   .section { margin-bottom: 2.5rem; }
-  .section-heading {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.25rem;
-  }
-  .section-heading h2 {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--text);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .section-heading::before {
-    content: '';
-    display: block;
-    width: 4px;
-    height: 1.25rem;
-    background: var(--orange);
-    border-radius: 2px;
-    flex-shrink: 0;
-  }
+  .section-heading { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
+  .section-heading h2 { font-size: 1.05rem; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.05em; }
+  .section-heading::before { content: ''; display: block; width: 4px; height: 1.25rem; background: var(--orange); border-radius: 2px; flex-shrink: 0; }
 
-  /* ── Top posts table ── */
-  .table-wrap {
-    border-radius: var(--radius);
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.85rem;
-  }
-  thead tr {
-    background: var(--night);
-  }
-  th {
-    padding: 0.85rem 1.1rem;
-    text-align: left;
-    font-size: 0.68rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: rgba(255,255,255,0.7);
-    white-space: nowrap;
-  }
-  tbody tr:nth-child(odd)  { background: #fff; }
+  /* ── KPI hero (dark) ── */
+  .kpi-hero { background: var(--forest); border-radius: var(--radius); padding: 2rem 2.5rem; margin-bottom: 2.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0; }
+  .kpi-card { padding: 1rem 1.25rem; border-right: 1px solid rgba(255,255,255,0.1); }
+  .kpi-card:last-child { border-right: none; }
+  .kpi-card .kpi-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); margin-bottom: 0.5rem; }
+  .kpi-card .kpi-value { font-size: 2.2rem; font-weight: 800; color: #fff; line-height: 1; }
+  .kpi-card .kpi-sub { font-size: 0.72rem; font-weight: 500; margin-top: 0.4rem; color: rgba(255,255,255,0.45); }
+  .kpi-card .kpi-sub.up { color: var(--lime); }
+
+  /* ── Tables ── */
+  .table-wrap { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  thead tr { background: var(--night); }
+  th { padding: 0.85rem 1.1rem; text-align: left; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.7); white-space: nowrap; }
+  tbody tr:nth-child(odd)  { background: var(--surface); }
   tbody tr:nth-child(even) { background: var(--cream); }
   tbody tr:hover td { background: #eef5f4; }
-  td {
-    padding: 0.85rem 1.1rem;
-    border-bottom: 1px solid var(--border);
-    vertical-align: middle;
-  }
+  td { padding: 0.85rem 1.1rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
   tbody tr:last-child td { border-bottom: none; }
+  .num-cell  { font-weight: 600; text-align: right; }
+  .rate-cell { text-align: right; font-weight: 700; color: var(--forest); }
+  .post-text { max-width: 320px; font-size: 0.82rem; line-height: 1.45; }
+  .date-cell { white-space: nowrap; font-size: 0.78rem; color: var(--muted); font-weight: 500; }
 
-  .post-text {
-    max-width: 320px;
-    font-size: 0.82rem;
-    color: var(--text);
-    line-height: 1.45;
-  }
-  .date-cell {
-    white-space: nowrap;
-    font-size: 0.78rem;
-    color: var(--muted);
-    font-weight: 500;
-  }
-  .num-cell {
-    font-weight: 600;
-    text-align: right;
-    color: var(--text);
-  }
-  .rate-cell {
-    text-align: right;
-    font-weight: 700;
-    color: var(--forest);
-  }
-
-  /* Rank pill on first column */
-  .rank-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    font-size: 0.65rem;
-    font-weight: 700;
-    margin-right: 0.6rem;
-    flex-shrink: 0;
-    vertical-align: middle;
-  }
+  /* Rank pill */
+  .rank-pill { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; font-size: 0.65rem; font-weight: 700; margin-right: 0.6rem; vertical-align: middle; }
   .rank-1 { background: var(--honey); color: #6b3a00; }
-  .rank-2 { background: #e0e0e0;     color: #555; }
-  .rank-3 { background: #f0d0b8;     color: #7a3a10; }
+  .rank-2 { background: #e0e0e0; color: #555; }
+  .rank-3 { background: #f0d0b8; color: #7a3a10; }
   .rank-n { background: var(--border); color: var(--muted); }
 
-  /* Inline engagement bar */
+  /* Impression bar */
   .eng-wrap { display: flex; align-items: center; gap: 0.5rem; justify-content: flex-end; }
   .eng-track { width: 48px; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
   .eng-fill  { height: 100%; background: var(--lime); border-radius: 3px; }
+
+  /* ── Audit: engagement distribution bar ── */
+  .dist-bar-track { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; min-width: 80px; }
+  .dist-bar-fill  { height: 100%; border-radius: 4px; background: var(--forest); }
+  .dist-bar-wrap  { display: flex; align-items: center; gap: 0.6rem; }
+
+  /* Format note chips */
+  .note-chip { display: inline-block; font-size: 0.68rem; font-weight: 600; padding: 0.15rem 0.55rem; border-radius: 4px; }
+  .note-best     { background: #e6f4e6; color: #1a5c1a; }
+  .note-ok       { background: #eff6ff; color: #1d4ed8; }
+  .note-warn     { background: #fefce8; color: #854d0e; }
+  .note-bad      { background: #fef2f2; color: #b91c1c; }
+
+  /* ── Monthly trend bar chart ── */
+  .chart-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 1.75rem; }
+  .chart-bars { display: flex; align-items: flex-end; gap: 0.75rem; height: 120px; margin-bottom: 0.75rem; }
+  .chart-col  { display: flex; flex-direction: column; align-items: center; flex: 1; gap: 0.3rem; height: 100%; justify-content: flex-end; }
+  .chart-bar  { width: 100%; border-radius: 4px 4px 0 0; background: var(--forest); opacity: 0.75; transition: opacity 0.2s; min-height: 4px; }
+  .chart-bar:hover { opacity: 1; }
+  .chart-bar.best  { background: var(--lime); opacity: 1; }
+  .chart-bar.worst { background: var(--orange); opacity: 0.85; }
+  .chart-val  { font-size: 0.68rem; font-weight: 700; color: var(--forest); }
+  .chart-val.best  { color: var(--lime); }
+  .chart-val.worst { color: var(--orange); }
+  .chart-labels { display: flex; gap: 0.75rem; }
+  .chart-lbl { flex: 1; text-align: center; font-size: 0.62rem; color: var(--muted); font-weight: 500; line-height: 1.3; }
+  .chart-lbl.best  { color: var(--forest); font-weight: 700; }
+  .chart-lbl.worst { color: var(--orange); font-weight: 700; }
+
+  /* ── Day of week ── */
+  .dow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; }
+  .dow-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; }
+  .dow-card.best { border-color: var(--forest); border-width: 2px; }
+  .dow-day  { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 0.35rem; }
+  .dow-day.best { color: var(--forest); }
+  .dow-avg  { font-size: 1.8rem; font-weight: 800; color: var(--text); line-height: 1; }
+  .dow-avg.best { color: var(--forest); }
+  .dow-posts { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; }
+  .dow-bar-track { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 0.6rem; }
+  .dow-bar-fill  { height: 100%; background: var(--forest); border-radius: 3px; }
+  .dow-best-tag  { display: inline-block; margin-top: 0.5rem; font-size: 0.65rem; font-weight: 700; background: var(--forest); color: #fff; padding: 0.1rem 0.45rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* ── Key findings cards ── */
+  .findings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  .finding-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .finding-n { width: 26px; height: 26px; border-radius: 50%; background: var(--forest); color: #fff; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .finding-title { font-size: 0.88rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .finding-body  { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
 </style>
 
 <body>
 
+<!-- ── Top report nav ── -->
 <nav class="top-nav">
   <div class="nav-logo">Orbisk Reports</div>
   <a href="./2025-01.html" class="active">Company Page</a>
@@ -318,9 +254,84 @@ const DATA = {
   <a href="../ambassadors/2025-01.html">Ambassadors</a>
 </nav>
 
+<!-- ── Tab bar ── -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="audit">Audit Baseline</button>
+  <button class="tab-btn" data-tab="jan">January 2025</button>
+</div>
+
+<!-- ════════════════════════════════════
+     TAB: Audit Baseline
+═════════════════════════════════════ -->
+<div class="tab-panel active" id="panel-audit">
 <div class="page">
 
-  <!-- Header -->
+  <header class="report-header">
+    <h1>
+      <span>Orbisk · LinkedIn Audit</span>
+      Channel Baseline
+    </h1>
+    <div class="report-badge audit">May 2025 – May 2026</div>
+  </header>
+
+  <!-- 1. Channel snapshot KPIs -->
+  <section class="section">
+    <div class="section-heading"><h2>Channel Snapshot</h2></div>
+    <div class="kpi-hero" id="audit-kpis"></div>
+  </section>
+
+  <!-- 2. Engagement distribution -->
+  <section class="section">
+    <div class="section-heading"><h2>Engagement Distribution</h2></div>
+    <div class="table-wrap">
+      <table id="dist-table">
+        <thead><tr><th>Tier</th><th style="text-align:right">Posts</th><th style="text-align:right">Avg Reactions</th><th>Bar</th><th>Label</th></tr></thead>
+        <tbody id="dist-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3. Format performance -->
+  <section class="section">
+    <div class="section-heading"><h2>Format Performance</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Format</th><th style="text-align:right">Posts</th><th style="text-align:right">Avg Reactions</th><th>Assessment</th></tr></thead>
+        <tbody id="format-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 4. Monthly trend -->
+  <section class="section">
+    <div class="section-heading"><h2>Monthly Avg Engagement</h2></div>
+    <div class="chart-wrap">
+      <div class="chart-bars" id="chart-bars"></div>
+      <div class="chart-labels" id="chart-labels"></div>
+    </div>
+  </section>
+
+  <!-- 5. Day of week -->
+  <section class="section">
+    <div class="section-heading"><h2>Day of Week Performance</h2></div>
+    <div class="dow-grid" id="dow-grid"></div>
+  </section>
+
+  <!-- 6. Key findings -->
+  <section class="section">
+    <div class="section-heading"><h2>Key Findings</h2></div>
+    <div class="findings-grid" id="findings-grid"></div>
+  </section>
+
+</div>
+</div><!-- #panel-audit -->
+
+<!-- ════════════════════════════════════
+     TAB: January 2025
+═════════════════════════════════════ -->
+<div class="tab-panel" id="panel-jan">
+<div class="page">
+
   <header class="report-header">
     <h1>
       <span>Orbisk · LinkedIn</span>
@@ -329,22 +340,21 @@ const DATA = {
     <div class="report-badge">January 2025</div>
   </header>
 
-  <!-- KPI hero -->
-  <section class="kpi-hero" id="kpi-hero">
+  <section class="kpi-hero">
     <div class="kpi-card">
       <div class="kpi-label">Total Followers</div>
       <div class="kpi-value" id="followers-total">—</div>
-      <div class="kpi-sub neutral">All time</div>
+      <div class="kpi-sub">All time</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label">New Followers</div>
       <div class="kpi-value" id="followers-gained">—</div>
-      <div class="kpi-sub up" id="followers-sub">this month</div>
+      <div class="kpi-sub up">this month</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label">Impressions</div>
       <div class="kpi-value" id="impressions">—</div>
-      <div class="kpi-sub neutral">organic reach</div>
+      <div class="kpi-sub">organic reach</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label">Engagement Rate</div>
@@ -354,20 +364,17 @@ const DATA = {
     <div class="kpi-card">
       <div class="kpi-label">Unique Visitors</div>
       <div class="kpi-value" id="unique-visitors">—</div>
-      <div class="kpi-sub neutral">page views</div>
+      <div class="kpi-sub">page views</div>
     </div>
   </section>
 
-  <!-- Top posts -->
   <section class="section">
     <div class="section-heading"><h2>Top Posts</h2></div>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Post</th>
-            <th>Date</th>
+            <th>#</th><th>Post</th><th>Date</th>
             <th style="text-align:right">Impressions</th>
             <th style="text-align:right">Reactions</th>
             <th style="text-align:right">Comments</th>
@@ -380,23 +387,137 @@ const DATA = {
     </div>
   </section>
 
-</div><!-- .page -->
+</div>
+</div><!-- #panel-jan -->
 
+<!-- ════════════════════════════════════
+     SCRIPTS
+═════════════════════════════════════ -->
 <script>
-  var m = DATA.page_metrics;
+  /* ── Tab switching ── */
+  document.querySelector('.tab-bar').addEventListener('click', function(e) {
+    var btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  });
 
+  /* ════════════════════════════
+     AUDIT TAB
+  ═════════════════════════════*/
+  var A = DATA_AUDIT;
+
+  /* 1. Snapshot KPIs */
+  var kpiHtml = '';
+  A.snapshot.forEach(function(k, i) {
+    kpiHtml += '<div class="kpi-card' + (i === A.snapshot.length - 1 ? ' style="border-right:none"' : '') + '">' +
+      '<div class="kpi-label">' + k.label + '</div>' +
+      '<div class="kpi-value">' + k.value + '</div>' +
+      '<div class="kpi-sub">' + k.sub + '</div>' +
+      '</div>';
+  });
+  document.getElementById('audit-kpis').innerHTML = kpiHtml;
+
+  /* 2. Engagement distribution */
+  var distBody = document.getElementById('dist-body');
+  A.engagement_distribution.forEach(function(row) {
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td style="font-weight:700">' + row.tier + '</td>' +
+      '<td class="num-cell">' + row.posts + '</td>' +
+      '<td class="num-cell" style="color:var(--forest)">' + row.avg + '</td>' +
+      '<td><div class="dist-bar-wrap"><div class="dist-bar-track" style="flex:1"><div class="dist-bar-fill" style="width:' + row.pct + '%"></div></div></div></td>' +
+      '<td style="font-size:0.82rem;color:var(--muted)">' + row.label + '</td>';
+    distBody.appendChild(tr);
+  });
+
+  /* 3. Format performance */
+  var formatBody = document.getElementById('format-body');
+  A.format_performance.forEach(function(row) {
+    var noteClass = row.note === 'Best performer' ? 'note-best'
+      : row.note === 'Workhorse'   ? 'note-ok'
+      : row.note === 'Inconsistent'? 'note-warn'
+      : 'note-bad';
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td style="font-weight:' + (row.highlight ? '700' : '500') + '">' + row.format + '</td>' +
+      '<td class="num-cell">' + row.posts + '</td>' +
+      '<td class="num-cell" style="color:var(--forest)">' + row.avg + '</td>' +
+      '<td><span class="note-chip ' + noteClass + '">' + row.note + '</span></td>';
+    formatBody.appendChild(tr);
+  });
+
+  /* 4. Monthly trend bar chart */
+  var maxAvg = Math.max.apply(null, A.monthly_trend.map(function(m) { return m.avg; }));
+  var barsEl   = document.getElementById('chart-bars');
+  var labelsEl = document.getElementById('chart-labels');
+  A.monthly_trend.forEach(function(m) {
+    var heightPct = Math.round(m.avg / maxAvg * 100);
+    var barClass  = m.best ? 'chart-bar best' : m.worst ? 'chart-bar worst' : 'chart-bar';
+    var valClass  = m.best ? 'chart-val best' : m.worst ? 'chart-val worst' : 'chart-val';
+    var lblClass  = m.best ? 'chart-lbl best' : m.worst ? 'chart-lbl worst' : 'chart-lbl';
+
+    var col = document.createElement('div');
+    col.className = 'chart-col';
+    col.innerHTML =
+      '<div class="' + valClass + '">' + m.avg + '</div>' +
+      '<div class="' + barClass + '" style="height:' + heightPct + '%"></div>';
+    barsEl.appendChild(col);
+
+    var lbl = document.createElement('div');
+    lbl.className = lblClass;
+    lbl.innerHTML = m.month.replace(' ', '<br>') + '<br>' + m.posts + ' posts';
+    labelsEl.appendChild(lbl);
+  });
+
+  /* 5. Day of week */
+  var maxDow = Math.max.apply(null, A.day_of_week.map(function(d) { return d.avg; }));
+  var dowGrid = document.getElementById('dow-grid');
+  A.day_of_week.forEach(function(d) {
+    var pct  = Math.round(d.avg / maxDow * 100);
+    var best = d.best || false;
+    var card = document.createElement('div');
+    card.className = 'dow-card' + (best ? ' best' : '');
+    card.innerHTML =
+      '<div class="dow-day' + (best ? ' best' : '') + '">' + d.day + '</div>' +
+      '<div class="dow-avg' + (best ? ' best' : '') + '">' + d.avg + '</div>' +
+      '<div class="dow-posts">' + d.posts + ' posts</div>' +
+      '<div class="dow-bar-track"><div class="dow-bar-fill" style="width:' + pct + '%"></div></div>' +
+      (best ? '<div class="dow-best-tag">Best day</div>' : '');
+    dowGrid.appendChild(card);
+  });
+
+  /* 6. Key findings */
+  var findingsGrid = document.getElementById('findings-grid');
+  A.findings.forEach(function(f) {
+    var card = document.createElement('div');
+    card.className = 'finding-card';
+    card.innerHTML =
+      '<div style="display:flex;align-items:flex-start;gap:0.75rem">' +
+        '<div class="finding-n">' + f.n + '</div>' +
+        '<div class="finding-title">' + f.title + '</div>' +
+      '</div>' +
+      '<div class="finding-body">' + f.body + '</div>';
+    findingsGrid.appendChild(card);
+  });
+
+  /* ════════════════════════════
+     JANUARY 2025 TAB
+  ═════════════════════════════*/
+  var m = DATA_JAN.page_metrics;
   document.getElementById('followers-total').textContent  = m.followers_total.toLocaleString();
   document.getElementById('followers-gained').textContent = '+' + m.followers_gained.toLocaleString();
   document.getElementById('impressions').textContent      = (m.impressions / 1000).toFixed(1) + 'k';
   document.getElementById('engagement-rate').textContent  = m.engagement_rate + '%';
   document.getElementById('unique-visitors').textContent  = m.unique_visitors.toLocaleString();
 
-  var maxImpressions = DATA.top_posts[0].impressions;
-  var tbody = document.getElementById('top-posts-body');
-
-  DATA.top_posts.forEach(function(p, i) {
+  var maxImp = DATA_JAN.top_posts[0].impressions;
+  var tbody  = document.getElementById('top-posts-body');
+  DATA_JAN.top_posts.forEach(function(p, i) {
     var rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'rank-n';
-    var barPct    = Math.round(p.impressions / maxImpressions * 100);
+    var barPct    = Math.round(p.impressions / maxImp * 100);
     var tr = document.createElement('tr');
     tr.innerHTML =
       '<td><span class="rank-pill ' + rankClass + '">' + (i + 1) + '</span></td>' +
@@ -404,8 +525,8 @@ const DATA = {
       '<td class="date-cell">' + p.date + '</td>' +
       '<td class="num-cell"><div class="eng-wrap">' + p.impressions.toLocaleString() + '<div class="eng-track"><div class="eng-fill" style="width:' + barPct + '%"></div></div></div></td>' +
       '<td class="num-cell">' + p.reactions + '</td>' +
-      '<td class="num-cell">' + p.comments + '</td>' +
-      '<td class="num-cell">' + p.shares + '</td>' +
+      '<td class="num-cell">' + p.comments  + '</td>' +
+      '<td class="num-cell">' + p.shares    + '</td>' +
       '<td class="rate-cell">' + p.engagement_rate + '%</td>';
     tbody.appendChild(tr);
   });
