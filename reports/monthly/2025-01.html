@@ -4,43 +4,137 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orbisk LinkedIn Report — January 2025</title>
-  <link rel="stylesheet" href="../../assets/css/report.css">
-  <style>
-    :root { --color-forest: #255653; --color-orange: #F16622; }
-    .top-nav {
-      background: var(--color-forest);
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      gap: 0;
-      margin: -2rem -2rem 2rem -2rem;
-    }
-    .top-nav .nav-logo {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      padding: 1rem 1.5rem 1rem 0;
-      border-right: 1px solid rgba(255,255,255,0.15);
-      margin-right: 0.5rem;
-      white-space: nowrap;
-    }
-    .top-nav a {
-      display: inline-block;
-      padding: 1rem 1.25rem;
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      border-bottom: 3px solid transparent;
-      transition: color 0.15s, border-color 0.15s;
-      white-space: nowrap;
-    }
-    .top-nav a:hover { color: #fff; border-bottom-color: rgba(255,255,255,0.4); }
-    .top-nav a.active { color: #fff; border-bottom-color: var(--color-orange); font-weight: 600; }
-  </style>
 </head>
+
+<script>
+const DATA = {
+  "period": "2025-01",
+  "page_metrics": {
+    "followers_total": 4821,
+    "followers_gained": 143,
+    "impressions": 87340,
+    "unique_visitors": 3210,
+    "engagement_rate": 3.8
+  },
+  "top_posts": [
+    {
+      "date": "2025-01-13",
+      "text": "500 tonnes of food waste prevented across our customer network — here's what that looks like in practice.",
+      "impressions": 14200,
+      "reactions": 387,
+      "comments": 54,
+      "shares": 41,
+      "engagement_rate": 3.4
+    },
+    {
+      "date": "2025-01-22",
+      "text": "A hotel kitchen cut food waste by 42% in 6 months using Orbisk. The numbers speak for themselves.",
+      "impressions": 11800,
+      "reactions": 298,
+      "comments": 37,
+      "shares": 29,
+      "engagement_rate": 3.1
+    },
+    {
+      "date": "2025-01-08",
+      "text": "Proud to announce our new partnership with a leading European hospitality group.",
+      "impressions": 9650,
+      "reactions": 241,
+      "comments": 45,
+      "shares": 22,
+      "engagement_rate": 3.2
+    },
+    {
+      "date": "2025-01-29",
+      "text": "2025 is the year B2B sustainability tech gets serious. Here's how Orbisk is positioning for what's next.",
+      "impressions": 8100,
+      "reactions": 189,
+      "comments": 31,
+      "shares": 18,
+      "engagement_rate": 2.9
+    },
+    {
+      "date": "2025-01-06",
+      "text": "1 in 3 meals produced globally never gets eaten. At Orbisk we're turning that stat into a solvable problem.",
+      "impressions": 7240,
+      "reactions": 156,
+      "comments": 24,
+      "shares": 14,
+      "engagement_rate": 2.7
+    }
+  ]
+};
+</script>
+
+<style>
+  :root {
+    --color-primary: #1a7a4a;
+    --color-accent:  #f4b942;
+    --color-forest:  #255653;
+    --color-orange:  #F16622;
+    --color-bg:      #f9f9f7;
+    --color-surface: #ffffff;
+    --color-text:    #1a1a1a;
+    --color-muted:   #6b7280;
+    --color-border:  #e5e7eb;
+    --font: 'Inter', system-ui, sans-serif;
+    --radius: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--color-bg); color: var(--color-text); line-height: 1.6; padding: 2rem; }
+
+  /* Nav */
+  .top-nav {
+    background: var(--color-forest);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: -2rem -2rem 2rem -2rem;
+  }
+  .top-nav .nav-logo {
+    font-size: 0.85rem; font-weight: 700; color: #fff;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 1rem 1.5rem 1rem 0;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    margin-right: 0.5rem; white-space: nowrap;
+  }
+  .top-nav a {
+    display: inline-block; padding: 1rem 1.25rem;
+    font-size: 0.82rem; font-weight: 500;
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s; white-space: nowrap;
+  }
+  .top-nav a:hover { color: #fff; border-bottom-color: rgba(255,255,255,0.4); }
+  .top-nav a.active { color: #fff; border-bottom-color: var(--color-orange); font-weight: 600; }
+
+  /* Header */
+  .report-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--color-border); }
+  .report-header h1 { font-size: 1.5rem; font-weight: 700; }
+  .report-header .period { color: var(--color-muted); font-size: 0.9rem; }
+
+  /* KPI grid */
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .metric-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.25rem; }
+  .metric-card .label { font-size: 0.75rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .metric-card .value { font-size: 2rem; font-weight: 700; margin: 0.25rem 0; }
+  .metric-card .delta { font-size: 0.8rem; }
+  .metric-card .delta.up { color: var(--color-primary); }
+
+  /* Section */
+  .section { margin-bottom: 2.5rem; }
+  .section h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; background: var(--color-surface); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--color-border); font-size: 0.875rem; }
+  th { background: var(--color-bg); text-align: left; padding: 0.75rem 1rem; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-muted); border-bottom: 1px solid var(--color-border); }
+  td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--color-bg); }
+  .excerpt-cell { max-width: 320px; font-size: 0.82rem; }
+</style>
+
 <body>
 
 <nav class="top-nav">
@@ -57,15 +151,15 @@
   </div>
 </header>
 
-<section class="metrics-grid" id="kpis">
+<section class="metrics-grid">
   <div class="metric-card">
     <div class="label">Total Followers</div>
     <div class="value" id="followers-total">—</div>
-    <div class="delta" id="followers-delta"></div>
   </div>
   <div class="metric-card">
     <div class="label">New Followers</div>
     <div class="value" id="followers-gained">—</div>
+    <div class="delta up" id="followers-delta"></div>
   </div>
   <div class="metric-card">
     <div class="label">Impressions</div>
@@ -95,40 +189,32 @@
         <th>Eng. Rate</th>
       </tr>
     </thead>
-    <tbody id="top-posts-body">
-      <tr><td colspan="7" style="color:var(--color-muted);text-align:center;padding:2rem;">No data loaded</td></tr>
-    </tbody>
+    <tbody id="top-posts-body"></tbody>
   </table>
 </section>
 
 <script>
-  fetch('../../data/processed/company-2025-01.json')
-    .then(r => r.json())
-    .then(data => {
-      const m = data.page_metrics;
-      const set = (id, val) => { if (val != null) document.getElementById(id).textContent = val; };
+  var m = DATA.page_metrics;
 
-      set('followers-total', m.followers_total?.toLocaleString());
-      set('followers-gained', m.followers_gained != null ? `+${m.followers_gained.toLocaleString()}` : null);
-      set('impressions', m.impressions?.toLocaleString());
-      set('engagement-rate', m.engagement_rate != null ? `${m.engagement_rate}%` : null);
-      set('unique-visitors', m.unique_visitors?.toLocaleString());
+  document.getElementById('followers-total').textContent   = m.followers_total.toLocaleString();
+  document.getElementById('followers-gained').textContent  = '+' + m.followers_gained.toLocaleString();
+  document.getElementById('impressions').textContent       = m.impressions.toLocaleString();
+  document.getElementById('engagement-rate').textContent   = m.engagement_rate + '%';
+  document.getElementById('unique-visitors').textContent   = m.unique_visitors.toLocaleString();
 
-      if (data.top_posts?.length) {
-        const tbody = document.getElementById('top-posts-body');
-        tbody.innerHTML = data.top_posts.map(p => `
-          <tr>
-            <td>${p.text?.slice(0, 60) ?? ''}…</td>
-            <td>${p.date ?? ''}</td>
-            <td>${p.impressions?.toLocaleString() ?? '—'}</td>
-            <td>${p.reactions ?? '—'}</td>
-            <td>${p.comments ?? '—'}</td>
-            <td>${p.shares ?? '—'}</td>
-            <td>${p.engagement_rate != null ? p.engagement_rate + '%' : '—'}</td>
-          </tr>`).join('');
-      }
-    })
-    .catch(() => {});
+  var tbody = document.getElementById('top-posts-body');
+  DATA.top_posts.forEach(function(p) {
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td class="excerpt-cell">' + p.text.slice(0, 80) + '…</td>' +
+      '<td style="white-space:nowrap;color:var(--color-muted);font-size:0.8rem">' + p.date + '</td>' +
+      '<td>' + p.impressions.toLocaleString() + '</td>' +
+      '<td>' + p.reactions + '</td>' +
+      '<td>' + p.comments + '</td>' +
+      '<td>' + p.shares + '</td>' +
+      '<td>' + p.engagement_rate + '%</td>';
+    tbody.appendChild(tr);
+  });
 </script>
 
 </body>
