@@ -3,13 +3,105 @@
   "founders": [
     {
       "name": "Olaf van der Veen",
+      "title": "Chief Impact Officer",
       "linkedin": "",
-      "posts": []
+      "posts": [
+        {
+          "date": "2025-01-06",
+          "excerpt": "1 in 3 meals produced globally never gets eaten. At Orbisk we're turning that stat into a solvable problem — one kitchen at a time.",
+          "format": "Text",
+          "topic": "Food Waste",
+          "impressions": 4821,
+          "reactions": 143,
+          "comments": 18,
+          "shares": 12,
+          "url": ""
+        },
+        {
+          "date": "2025-01-13",
+          "excerpt": "We just hit a new milestone: 500 tonnes of food waste prevented across our customer network. Here's what that actually looks like in practice.",
+          "format": "Carousel",
+          "topic": "Impact Story",
+          "impressions": 9340,
+          "reactions": 287,
+          "comments": 41,
+          "shares": 34,
+          "url": ""
+        },
+        {
+          "date": "2025-01-20",
+          "excerpt": "Why sustainability reporting without operational data is just greenwashing. A thread on what real accountability looks like.",
+          "format": "Text",
+          "topic": "Sustainability",
+          "impressions": 3210,
+          "reactions": 98,
+          "comments": 22,
+          "shares": 9,
+          "url": ""
+        },
+        {
+          "date": "2025-01-27",
+          "excerpt": "Visited a hotel kitchen today that cut food waste by 42% in 6 months using Orbisk. The chef's reaction said it all.",
+          "format": "Image",
+          "topic": "Impact Story",
+          "impressions": 6104,
+          "reactions": 201,
+          "comments": 29,
+          "shares": 18,
+          "url": ""
+        }
+      ]
     },
     {
       "name": "Anastasia Dellis",
+      "title": "CEO",
       "linkedin": "",
-      "posts": []
+      "posts": [
+        {
+          "date": "2025-01-08",
+          "excerpt": "Proud to announce our new partnership with a leading European hospitality group. This is what scaling impact looks like.",
+          "format": "Image",
+          "topic": "Partnerships",
+          "impressions": 7650,
+          "reactions": 312,
+          "comments": 53,
+          "shares": 27,
+          "url": ""
+        },
+        {
+          "date": "2025-01-15",
+          "excerpt": "Building a company that's both profitable and planet-positive isn't a trade-off. It's a design choice. Here's our approach.",
+          "format": "Text",
+          "topic": "Vision",
+          "impressions": 5430,
+          "reactions": 189,
+          "comments": 34,
+          "shares": 21,
+          "url": ""
+        },
+        {
+          "date": "2025-01-22",
+          "excerpt": "We're hiring! Looking for a Head of Sales who believes the food system can be fixed. Tag someone who should apply.",
+          "format": "Text",
+          "topic": "Company Growth",
+          "impressions": 4180,
+          "reactions": 97,
+          "comments": 45,
+          "shares": 8,
+          "url": ""
+        },
+        {
+          "date": "2025-01-29",
+          "excerpt": "2025 is the year B2B sustainability tech gets serious. Three trends I'm watching — and how we're positioning Orbisk.",
+          "format": "Carousel",
+          "topic": "Vision",
+          "impressions": 8920,
+          "reactions": 256,
+          "comments": 62,
+          "shares": 39,
+          "url": ""
+        }
+      ]
     }
   ]
 }

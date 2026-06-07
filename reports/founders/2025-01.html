@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbisk Founder Post Tracker — January 2025</title>
+  <link rel="stylesheet" href="../../assets/css/report.css">
+  <style>
+    /* ── Founder tabs ── */
+    .founder-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .tab-btn {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      background: var(--color-surface);
+      color: var(--color-muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: all 0.15s;
+    }
+    .tab-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    .tab-btn.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+    }
+
+    /* ── Founder panel ── */
+    .founder-panel { display: none; }
+    .founder-panel.active { display: block; }
+
+    .founder-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+    .founder-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .founder-meta h2 { font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
+    .founder-meta .title-tag {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      margin-top: 0.15rem;
+    }
+
+    /* ── KPI cards — best post gets accent border ── */
+    .metric-card.best { border-top: 3px solid var(--color-accent); }
+    .metric-card.best .value { font-size: 1.1rem; line-height: 1.4; }
+
+    /* ── Top 3 spotlight ── */
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .spotlight-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      position: relative;
+    }
+    .spotlight-rank {
+      position: absolute;
+      top: -10px; left: 1rem;
+      background: var(--color-accent);
+      color: #1a1a1a;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .spotlight-card .excerpt {
+      font-size: 0.875rem;
+      color: var(--color-text);
+      margin: 0.75rem 0 1rem;
+      line-height: 1.5;
+    }
+    .spotlight-stats {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.78rem;
+      color: var(--color-muted);
+    }
+    .spotlight-stats span strong { color: var(--color-text); }
+    .spotlight-card .post-meta {
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.25rem;
+    }
+    .format-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+    .format-Text    { background: #eff6ff; color: #3b82f6; }
+    .format-Carousel{ background: #fdf4ff; color: #a855f7; }
+    .format-Image   { background: #fff7ed; color: #f97316; }
+    .format-Video   { background: #f0fdf4; color: #22c55e; }
+    .format-Article { background: #fefce8; color: #ca8a04; }
+
+    /* ── Topic distribution ── */
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+    .topic-row {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 0.9rem 1rem;
+    }
+    .topic-row .topic-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .topic-row .topic-label .name { font-weight: 600; }
+    .topic-row .topic-label .count { color: var(--color-muted); }
+    .topic-bar-track {
+      height: 6px;
+      background: var(--color-border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .topic-bar-fill {
+      height: 100%;
+      background: var(--color-primary);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    /* ── Post table extras ── */
+    td.excerpt-cell { max-width: 280px; }
+    td.excerpt-cell span {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+    .eng-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+    }
+    .eng-bar-track {
+      flex: 1;
+      height: 5px;
+      background: var(--color-border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .eng-bar-fill {
+      height: 100%;
+      background: var(--color-primary);
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+<header class="report-header">
+  <div>
+    <h1>Orbisk Founder Post Tracker</h1>
+    <div class="period" id="report-period">Loading…</div>
+  </div>
+</header>
+
+<!-- Tabs -->
+<div class="founder-tabs" id="tabs"></div>
+
+<!-- Panels injected by JS -->
+<div id="panels"></div>
+
+<script>
+(async () => {
+  const res = await fetch('../../data/processed/founders-2025-01.json');
+  const data = await res.json();
+
+  const monthLabel = new Date(data.period + '-01')
+    .toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+  document.getElementById('report-period').textContent = `${monthLabel} · Founder Posts`;
+  document.title = `Orbisk Founder Post Tracker — ${monthLabel}`;
+
+  const tabs  = document.getElementById('tabs');
+  const panels = document.getElementById('panels');
+
+  data.founders.forEach((founder, fi) => {
+    /* ── Tab button ── */
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (fi === 0 ? ' active' : '');
+    btn.textContent = founder.name;
+    btn.dataset.index = fi;
+    tabs.appendChild(btn);
+
+    /* ── Derived metrics ── */
+    const posts = founder.posts ?? [];
+    const totalImpressions = posts.reduce((s, p) => s + (p.impressions ?? 0), 0);
+    const totalEngagement  = posts.reduce((s, p) => s + (p.reactions ?? 0) + (p.comments ?? 0) + (p.shares ?? 0), 0);
+    const avgEng = posts.length
+      ? (posts.reduce((s, p) => {
+          const eng = (p.reactions ?? 0) + (p.comments ?? 0) + (p.shares ?? 0);
+          return s + (p.impressions ? eng / p.impressions * 100 : 0);
+        }, 0) / posts.length).toFixed(1)
+      : '—';
+
+    const sorted = [...posts].sort((a, b) => {
+      const eA = (a.reactions ?? 0) + (a.comments ?? 0) + (a.shares ?? 0);
+      const eB = (b.reactions ?? 0) + (b.comments ?? 0) + (b.shares ?? 0);
+      return eB - eA;
+    });
+    const bestPost = sorted[0];
+    const top3 = sorted.slice(0, 3);
+    const maxEng = sorted[0]
+      ? (sorted[0].reactions ?? 0) + (sorted[0].comments ?? 0) + (sorted[0].shares ?? 0)
+      : 1;
+
+    /* ── Topic distribution ── */
+    const topicCounts = {};
+    posts.forEach(p => {
+      const t = p.topic ?? 'Other';
+      topicCounts[t] = (topicCounts[t] ?? 0) + 1;
+    });
+    const topicEntries = Object.entries(topicCounts).sort((a, b) => b[1] - a[1]);
+
+    /* ── Initials for avatar ── */
+    const initials = founder.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+
+    /* ── Build panel HTML ── */
+    const panel = document.createElement('div');
+    panel.className = 'founder-panel' + (fi === 0 ? ' active' : '');
+    panel.id = `panel-${fi}`;
+
+    panel.innerHTML = `
+      <!-- Founder meta -->
+      <div class="founder-meta">
+        <div class="founder-avatar">${initials}</div>
+        <div>
+          <h2>${founder.name}</h2>
+          <div class="title-tag">${founder.title ?? ''}</div>
+        </div>
+      </div>
+
+      <!-- KPI cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="label">Posts Published</div>
+          <div class="value">${posts.length}</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Total Impressions</div>
+          <div class="value">${totalImpressions.toLocaleString()}</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Total Engagement</div>
+          <div class="value">${totalEngagement.toLocaleString()}</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Avg Eng. Rate</div>
+          <div class="value">${avgEng}%</div>
+        </div>
+        <div class="metric-card best">
+          <div class="label">Best Post</div>
+          <div class="value">${bestPost ? '"' + bestPost.excerpt.slice(0, 48) + '…"' : '—'}</div>
+        </div>
+      </div>
+
+      <!-- Post performance table -->
+      <div class="section">
+        <h2>Post Performance</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Post</th>
+              <th>Format</th>
+              <th>Topic</th>
+              <th>Impressions</th>
+              <th>Reactions</th>
+              <th>Comments</th>
+              <th>Shares</th>
+              <th>Total Eng.</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${posts.length ? posts.map(p => {
+              const eng = (p.reactions ?? 0) + (p.comments ?? 0) + (p.shares ?? 0);
+              const barPct = Math.round(eng / maxEng * 100);
+              return `<tr>
+                <td style="white-space:nowrap;color:var(--color-muted);font-size:0.8rem">${p.date ?? ''}</td>
+                <td class="excerpt-cell"><span>${p.excerpt ?? ''}</span></td>
+                <td><span class="format-badge format-${p.format ?? 'Text'}">${p.format ?? '—'}</span></td>
+                <td style="font-size:0.82rem">${p.topic ?? '—'}</td>
+                <td>${(p.impressions ?? 0).toLocaleString()}</td>
+                <td>${p.reactions ?? '—'}</td>
+                <td>${p.comments ?? '—'}</td>
+                <td>${p.shares ?? '—'}</td>
+                <td>
+                  <div class="eng-bar">
+                    <span>${eng}</span>
+                    <div class="eng-bar-track"><div class="eng-bar-fill" style="width:${barPct}%"></div></div>
+                  </div>
+                </td>
+              </tr>`;
+            }).join('') : '<tr><td colspan="9" style="color:var(--color-muted);text-align:center;padding:2rem;">No posts this period</td></tr>'}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Top 3 spotlight -->
+      <div class="section">
+        <h2>Top 3 Posts</h2>
+        <div class="spotlight-grid">
+          ${top3.map((p, i) => {
+            const eng = (p.reactions ?? 0) + (p.comments ?? 0) + (p.shares ?? 0);
+            const label = ['#1 Best', '#2', '#3'][i];
+            return `<div class="spotlight-card">
+              <div class="spotlight-rank">${label}</div>
+              <div class="post-meta">
+                <span>${p.date ?? ''}</span>
+                <span class="format-badge format-${p.format ?? 'Text'}">${p.format ?? ''}</span>
+                <span>${p.topic ?? ''}</span>
+              </div>
+              <p class="excerpt">"${p.excerpt}"</p>
+              <div class="spotlight-stats">
+                <span><strong>${(p.impressions ?? 0).toLocaleString()}</strong> impressions</span>
+                <span><strong>${eng}</strong> engagements</span>
+                <span><strong>${p.impressions ? (eng / p.impressions * 100).toFixed(1) : '—'}%</strong> eng. rate</span>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+
+      <!-- Topic distribution -->
+      <div class="section">
+        <h2>Topic Distribution</h2>
+        <div class="topic-grid">
+          ${topicEntries.map(([topic, count]) => `
+            <div class="topic-row">
+              <div class="topic-label">
+                <span class="name">${topic}</span>
+                <span class="count">${count} post${count > 1 ? 's' : ''}</span>
+              </div>
+              <div class="topic-bar-track">
+                <div class="topic-bar-fill" style="width:${Math.round(count / posts.length * 100)}%"></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+
+    panels.appendChild(panel);
+  });
+
+  /* ── Tab switching ── */
+  tabs.addEventListener('click', e => {
+    const btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.founder-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(`panel-${btn.dataset.index}`).classList.add('active');
+  });
+})();
+</script>
+
+</body>
+</html>
