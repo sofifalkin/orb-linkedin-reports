@@ -115,6 +115,8 @@ const DATA = {
   :root {
     --color-primary: #1a7a4a;
     --color-accent:  #f4b942;
+    --color-forest:  #255653;
+    --color-orange:  #F16622;
     --color-bg:      #f9f9f7;
     --color-surface: #ffffff;
     --color-text:    #1a1a1a;
@@ -125,6 +127,40 @@ const DATA = {
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: var(--font); background: var(--color-bg); color: var(--color-text); line-height: 1.6; padding: 2rem; }
+
+  /* Nav */
+  .top-nav {
+    background: var(--color-forest);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: -2rem -2rem 2rem -2rem;
+  }
+  .top-nav .nav-logo {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 1rem 1.5rem 1rem 0;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    margin-right: 0.5rem;
+    white-space: nowrap;
+  }
+  .top-nav a {
+    display: inline-block;
+    padding: 1rem 1.25rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .top-nav a:hover { color: #fff; border-bottom-color: rgba(255,255,255,0.4); }
+  .top-nav a.active { color: #fff; border-bottom-color: var(--color-orange); font-weight: 600; }
 
   /* Header */
   .report-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--color-border); }
@@ -221,6 +257,13 @@ const DATA = {
 </style>
 
 <body>
+
+<nav class="top-nav">
+  <div class="nav-logo">Orbisk Reports</div>
+  <a href="#">Company Page</a>
+  <a href="#">Founders</a>
+  <a href="#" class="active">Ambassadors</a>
+</nav>
 
 <header class="report-header">
   <div>
