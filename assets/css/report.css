@@ -1,0 +1,86 @@
+:root {
+  --color-primary: #1a7a4a;
+  --color-accent: #f4b942;
+  --color-bg: #f9f9f7;
+  --color-surface: #ffffff;
+  --color-text: #1a1a1a;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --font: 'Inter', system-ui, sans-serif;
+  --radius: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  padding: 2rem;
+}
+
+.report-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.report-header h1 { font-size: 1.5rem; font-weight: 700; }
+.report-header .period { color: var(--color-muted); font-size: 0.9rem; }
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.metric-card .label { font-size: 0.75rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.metric-card .value { font-size: 2rem; font-weight: 700; margin: 0.25rem 0; }
+.metric-card .delta { font-size: 0.8rem; }
+.metric-card .delta.up { color: var(--color-primary); }
+.metric-card .delta.down { color: #dc2626; }
+
+.section { margin-bottom: 2.5rem; }
+.section h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  font-size: 0.875rem;
+}
+
+th {
+  background: var(--color-bg);
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  border-bottom: 1px solid var(--color-border);
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--color-bg); }

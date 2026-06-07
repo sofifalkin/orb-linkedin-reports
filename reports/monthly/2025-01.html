@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbisk LinkedIn Report — January 2025</title>
+  <link rel="stylesheet" href="../../assets/css/report.css">
+</head>
+<body>
+
+<header class="report-header">
+  <div>
+    <h1>Orbisk LinkedIn Report</h1>
+    <div class="period">January 2025 · Company Page</div>
+  </div>
+</header>
+
+<section class="metrics-grid" id="kpis">
+  <div class="metric-card">
+    <div class="label">Total Followers</div>
+    <div class="value" id="followers-total">—</div>
+    <div class="delta" id="followers-delta"></div>
+  </div>
+  <div class="metric-card">
+    <div class="label">New Followers</div>
+    <div class="value" id="followers-gained">—</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Impressions</div>
+    <div class="value" id="impressions">—</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Engagement Rate</div>
+    <div class="value" id="engagement-rate">—</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Unique Visitors</div>
+    <div class="value" id="unique-visitors">—</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Top Posts</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Post</th>
+        <th>Date</th>
+        <th>Impressions</th>
+        <th>Reactions</th>
+        <th>Comments</th>
+        <th>Shares</th>
+        <th>Eng. Rate</th>
+      </tr>
+    </thead>
+    <tbody id="top-posts-body">
+      <tr><td colspan="7" style="color:var(--color-muted);text-align:center;padding:2rem;">No data loaded</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<script>
+  fetch('../../data/processed/company-2025-01.json')
+    .then(r => r.json())
+    .then(data => {
+      const m = data.page_metrics;
+      const set = (id, val) => { if (val != null) document.getElementById(id).textContent = val; };
+
+      set('followers-total', m.followers_total?.toLocaleString());
+      set('followers-gained', m.followers_gained != null ? `+${m.followers_gained.toLocaleString()}` : null);
+      set('impressions', m.impressions?.toLocaleString());
+      set('engagement-rate', m.engagement_rate != null ? `${m.engagement_rate}%` : null);
+      set('unique-visitors', m.unique_visitors?.toLocaleString());
+
+      if (data.top_posts?.length) {
+        const tbody = document.getElementById('top-posts-body');
+        tbody.innerHTML = data.top_posts.map(p => `
+          <tr>
+            <td>${p.text?.slice(0, 60) ?? ''}…</td>
+            <td>${p.date ?? ''}</td>
+            <td>${p.impressions?.toLocaleString() ?? '—'}</td>
+            <td>${p.reactions ?? '—'}</td>
+            <td>${p.comments ?? '—'}</td>
+            <td>${p.shares ?? '—'}</td>
+            <td>${p.engagement_rate != null ? p.engagement_rate + '%' : '—'}</td>
+          </tr>`).join('');
+      }
+    })
+    .catch(() => {});
+</script>
+
+</body>
+</html>
