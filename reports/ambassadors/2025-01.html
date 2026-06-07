@@ -4,15 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orbisk Creator &amp; Ambassador Benchmark — January 2025</title>
-  <link rel="stylesheet" href="../../assets/css/report.css">
   <style>
-    /* ── Summary bar ── */
-    .summary-bar {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
+    /* ── Base (inlined from assets/css/report.css) ── */
+    :root {
+      --color-primary: #1a7a4a;
+      --color-accent: #f4b942;
+      --color-bg: #f9f9f7;
+      --color-surface: #ffffff;
+      --color-text: #1a1a1a;
+      --color-muted: #6b7280;
+      --color-border: #e5e7eb;
+      --font: 'Inter', system-ui, sans-serif;
+      --radius: 8px;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    .report-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--color-border);
+    }
+    .report-header h1 { font-size: 1.5rem; font-weight: 700; }
+    .report-header .period { color: var(--color-muted); font-size: 0.9rem; }
+    .section { margin-bottom: 2.5rem; }
+    .section h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      font-size: 0.875rem;
+    }
+    th {
+      background: var(--color-bg);
+      text-align: left;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-muted);
+      border-bottom: 1px solid var(--color-border);
+    }
+    td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--color-bg); }
+
+    /* ── Summary bar ── */
+    .summary-bar { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
     .summary-pill {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
@@ -25,13 +75,8 @@
     }
     .summary-pill strong { color: var(--color-primary); }
 
-    /* ── Filters ── */
-    .filter-row {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
+    /* ── Tier filters ── */
+    .filter-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
     .filter-btn {
       padding: 0.35rem 0.9rem;
       border: 1px solid var(--color-border);
@@ -47,7 +92,7 @@
     .filter-btn:hover  { border-color: var(--color-primary); color: var(--color-primary); }
     .filter-btn.active { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
 
-    /* ── Creator cards grid ── */
+    /* ── Creator cards ── */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -66,50 +111,41 @@
     }
     .creator-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
     .creator-card.hidden { display: none; }
-
-    .card-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 0.75rem;
-    }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
     .card-identity { display: flex; gap: 0.75rem; align-items: flex-start; }
     .creator-avatar {
       width: 42px; height: 42px;
       border-radius: 50%;
       background: var(--color-primary);
       color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.95rem;
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.95rem; flex-shrink: 0;
     }
-    .creator-name { font-weight: 700; font-size: 0.95rem; line-height: 1.2; }
-    .creator-role { font-size: 0.75rem; color: var(--color-muted); margin-top: 0.1rem; }
+    .creator-name    { font-weight: 700; font-size: 0.95rem; line-height: 1.2; }
+    .creator-role    { font-size: 0.75rem; color: var(--color-muted); margin-top: 0.1rem; }
     .creator-company { font-size: 0.72rem; color: var(--color-muted); }
 
     /* Tier badges */
     .tier-badge {
-      font-size: 0.65rem;
-      font-weight: 700;
+      font-size: 0.65rem; font-weight: 700;
       padding: 0.2rem 0.55rem;
       border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      white-space: nowrap;
+      text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
     }
     .tier-Nano  { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
     .tier-Micro { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
     .tier-Mid   { background: #fdf4ff; color: #9333ea; border: 1px solid #e9d5ff; }
     .tier-Macro { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
 
+    /* Status badges */
+    .status-badge { font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600; }
+    .status-not  { background: #f3f4f6; color: var(--color-muted); }
+    .status-sent { background: #fefce8; color: #854d0e; }
+    .status-live { background: #dcfce7; color: #15803d; }
+
     /* Stat row */
     .card-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.5rem;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;
       padding: 0.75rem 0;
       border-top: 1px solid var(--color-border);
       border-bottom: 1px solid var(--color-border);
@@ -121,99 +157,40 @@
     /* Fit score */
     .fit-row { display: flex; align-items: center; gap: 0.75rem; }
     .fit-label { font-size: 0.75rem; color: var(--color-muted); white-space: nowrap; }
-    .fit-track {
-      flex: 1;
-      height: 7px;
-      background: var(--color-border);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .fit-fill {
-      height: 100%;
-      border-radius: 4px;
-      background: linear-gradient(90deg, var(--color-primary), #2db36e);
-    }
-    .fit-score-val {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--color-primary);
-      white-space: nowrap;
-    }
+    .fit-track { flex: 1; height: 7px; background: var(--color-border); border-radius: 4px; overflow: hidden; }
+    .fit-fill  { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--color-primary), #2db36e); }
+    .fit-score-val { font-size: 0.85rem; font-weight: 700; color: var(--color-primary); white-space: nowrap; }
 
     /* Topic chips */
     .topic-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
     .topic-chip {
-      font-size: 0.68rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      font-weight: 500;
-      background: #f3f4f6;
-      color: var(--color-muted);
+      font-size: 0.68rem; padding: 0.15rem 0.5rem;
+      border-radius: 4px; font-weight: 500;
+      background: #f3f4f6; color: var(--color-muted);
     }
     .topic-chip.match { background: #dcfce7; color: #15803d; }
-
-    /* Fit notes */
     .fit-notes { font-size: 0.78rem; color: var(--color-muted); line-height: 1.5; }
 
     /* ── Topic coverage matrix ── */
-    .matrix-wrap {
-      overflow-x: auto;
-    }
-    .coverage-table {
-      min-width: 560px;
-    }
-    .coverage-table td, .coverage-table th {
-      text-align: center;
-      padding: 0.6rem 0.75rem;
-    }
+    .matrix-wrap { overflow-x: auto; }
+    .coverage-table { min-width: 560px; }
+    .coverage-table td, .coverage-table th { text-align: center; padding: 0.6rem 0.75rem; }
     .coverage-table th:first-child,
-    .coverage-table td:first-child {
-      text-align: left;
-      font-weight: 600;
-      font-size: 0.8rem;
-    }
-    .coverage-dot {
-      display: inline-block;
-      width: 18px; height: 18px;
-      background: var(--color-primary);
-      border-radius: 50%;
-      opacity: 0.85;
-    }
-    .coverage-empty {
-      display: inline-block;
-      width: 18px; height: 18px;
-      background: var(--color-border);
-      border-radius: 50%;
-    }
-    .theme-header {
-      font-size: 0.72rem;
-      text-transform: none;
-      letter-spacing: 0;
-      font-weight: 600;
-      color: var(--color-text);
-      max-width: 100px;
-      line-height: 1.3;
-    }
+    .coverage-table td:first-child { text-align: left; font-weight: 600; font-size: 0.8rem; }
+    .coverage-dot   { display: inline-block; width: 18px; height: 18px; background: var(--color-primary); border-radius: 50%; opacity: 0.85; }
+    .coverage-empty { display: inline-block; width: 18px; height: 18px; background: var(--color-border); border-radius: 50%; }
+    .theme-header   { font-size: 0.72rem; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--color-text); max-width: 100px; line-height: 1.3; }
 
-    /* ── Outreach priority ranking ── */
+    /* ── Outreach ranking ── */
     .ranking-list { display: flex; flex-direction: column; gap: 0.75rem; }
     .rank-row {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius);
       padding: 1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
+      display: flex; align-items: center; gap: 1.25rem;
     }
-    .rank-number {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--color-border);
-      width: 2rem;
-      flex-shrink: 0;
-      text-align: center;
-    }
+    .rank-number { font-size: 1.5rem; font-weight: 700; color: var(--color-border); width: 2rem; flex-shrink: 0; text-align: center; }
     .rank-row:nth-child(1) .rank-number { color: #f4b942; }
     .rank-row:nth-child(2) .rank-number { color: #9ca3af; }
     .rank-row:nth-child(3) .rank-number { color: #b45309; }
@@ -224,16 +201,6 @@
     .rank-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; flex-shrink: 0; }
     .rank-score { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); }
     .rank-score-lbl { font-size: 0.65rem; color: var(--color-muted); text-transform: uppercase; }
-
-    .status-badge {
-      font-size: 0.68rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      font-weight: 600;
-    }
-    .status-not  { background: #f3f4f6; color: var(--color-muted); }
-    .status-sent { background: #fefce8; color: #854d0e; }
-    .status-live { background: #dcfce7; color: #15803d; }
   </style>
 </head>
 <body>
@@ -241,13 +208,12 @@
 <header class="report-header">
   <div>
     <h1>Creator &amp; Ambassador Benchmark</h1>
-    <div class="period" id="report-period">Loading…</div>
+    <div class="period">January 2025 · Ambassador Benchmark</div>
   </div>
 </header>
 
 <div class="summary-bar" id="summary-bar"></div>
 
-<!-- ── Section 1: Shortlist ── -->
 <div class="section">
   <h2>Creator Shortlist</h2>
   <div class="filter-row" id="tier-filters">
@@ -260,7 +226,6 @@
   <div class="cards-grid" id="cards-grid"></div>
 </div>
 
-<!-- ── Section 2: Topic coverage ── -->
 <div class="section">
   <h2>Topic Coverage</h2>
   <div class="matrix-wrap">
@@ -271,24 +236,120 @@
   </div>
 </div>
 
-<!-- ── Section 3: Outreach priority ranking ── -->
 <div class="section">
   <h2>Outreach Priority Ranking</h2>
   <div class="ranking-list" id="ranking-list"></div>
 </div>
 
 <script>
-(async () => {
-  const res  = await fetch('../../data/processed/ambassadors-2025-01.json');
-  const data = await res.json();
+const data = {
+  "period": "2025-01",
+  "themes": ["Food Waste", "Hospitality Sustainability", "Food Tech", "Circular Economy"],
+  "creators": [
+    {
+      "id": "c1",
+      "name": "Lena Hartmann",
+      "role": "Sustainability Consultant",
+      "company": "Independent",
+      "linkedin": "",
+      "followers": 28400,
+      "engagement_rate": 4.8,
+      "avg_impressions_per_post": 11200,
+      "posts_per_month": 8,
+      "tier": "Mid",
+      "fit_score": 9.1,
+      "fit_notes": "Consistently covers food system change; hospitality sector audience overlap.",
+      "topics": ["Food Waste", "Hospitality Sustainability", "Circular Economy"],
+      "outreach_status": "Not contacted"
+    },
+    {
+      "id": "c2",
+      "name": "Daan Visser",
+      "role": "Head of Innovation",
+      "company": "Sodexo Netherlands",
+      "linkedin": "",
+      "followers": 14700,
+      "engagement_rate": 6.2,
+      "avg_impressions_per_post": 7300,
+      "posts_per_month": 5,
+      "tier": "Micro",
+      "fit_score": 8.7,
+      "fit_notes": "High engagement, direct foodservice decision-maker network.",
+      "topics": ["Food Waste", "Hospitality Sustainability", "Food Tech"],
+      "outreach_status": "Not contacted"
+    },
+    {
+      "id": "c3",
+      "name": "Sophie Brennan",
+      "role": "Food Tech Journalist",
+      "company": "AgriFood Brief",
+      "linkedin": "",
+      "followers": 52100,
+      "engagement_rate": 2.9,
+      "avg_impressions_per_post": 19800,
+      "posts_per_month": 12,
+      "tier": "Macro",
+      "fit_score": 7.4,
+      "fit_notes": "Large reach but broad audience; strong for brand awareness over conversion.",
+      "topics": ["Food Tech", "Circular Economy", "Food Waste"],
+      "outreach_status": "Not contacted"
+    },
+    {
+      "id": "c4",
+      "name": "Marco de Wit",
+      "role": "Restaurant Group Director",
+      "company": "GreenTable Group",
+      "linkedin": "",
+      "followers": 9800,
+      "engagement_rate": 7.1,
+      "avg_impressions_per_post": 4900,
+      "posts_per_month": 4,
+      "tier": "Micro",
+      "fit_score": 8.2,
+      "fit_notes": "Credible operator voice; authentic food waste narrative from the kitchen floor.",
+      "topics": ["Food Waste", "Hospitality Sustainability"],
+      "outreach_status": "Not contacted"
+    },
+    {
+      "id": "c5",
+      "name": "Priya Nair",
+      "role": "Circular Economy Lead",
+      "company": "Ellen MacArthur Foundation",
+      "linkedin": "",
+      "followers": 41300,
+      "engagement_rate": 3.6,
+      "avg_impressions_per_post": 15600,
+      "posts_per_month": 6,
+      "tier": "Macro",
+      "fit_score": 7.9,
+      "fit_notes": "Strong circular economy credentials; reaches policy and corporate sustainability buyers.",
+      "topics": ["Circular Economy", "Food Waste", "Food Tech"],
+      "outreach_status": "Not contacted"
+    },
+    {
+      "id": "c6",
+      "name": "Joris Bakker",
+      "role": "Founder & CEO",
+      "company": "Wasteless Kitchen",
+      "linkedin": "",
+      "followers": 7200,
+      "engagement_rate": 8.4,
+      "avg_impressions_per_post": 3800,
+      "posts_per_month": 10,
+      "tier": "Nano",
+      "fit_score": 8.5,
+      "fit_notes": "Niche but highly engaged; direct peer of Orbisk's customer base.",
+      "topics": ["Food Waste", "Circular Economy", "Hospitality Sustainability"],
+      "outreach_status": "Not contacted"
+    }
+  ]
+};
 
-  const monthLabel = new Date(data.period + '-01')
-    .toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
-  document.getElementById('report-period').textContent = `${monthLabel} · Ambassador Benchmark`;
-  document.title = `Orbisk Creator & Ambassador Benchmark — ${monthLabel}`;
-
-  const creators = data.creators ?? [];
-  const themes   = data.themes   ?? [];
+(() => {
+  const creators = data.creators;
+  const themes   = data.themes;
+  const fmt = n => n >= 1000 ? (n / 1000).toFixed(1) + 'k' : n;
+  const statusClass = s => s === 'Live' ? 'status-live' : s === 'Contacted' ? 'status-sent' : 'status-not';
 
   /* ── Summary bar ── */
   const totalFollowers = creators.reduce((s, c) => s + c.followers, 0);
@@ -303,17 +364,11 @@
 
   /* ── Creator cards ── */
   const grid = document.getElementById('cards-grid');
-  const fmt  = n => n >= 1000 ? (n / 1000).toFixed(1) + 'k' : n;
-
   creators.forEach(c => {
     const initials = c.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-    const statusClass = c.outreach_status === 'Live' ? 'status-live'
-                      : c.outreach_status === 'Contacted' ? 'status-sent' : 'status-not';
-
     const card = document.createElement('div');
     card.className = 'creator-card';
     card.dataset.tier = c.tier;
-
     card.innerHTML = `
       <div class="card-top">
         <div class="card-identity">
@@ -326,37 +381,22 @@
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.35rem">
           <span class="tier-badge tier-${c.tier}">${c.tier}</span>
-          <span class="status-badge ${statusClass}">${c.outreach_status}</span>
+          <span class="status-badge ${statusClass(c.outreach_status)}">${c.outreach_status}</span>
         </div>
       </div>
-
       <div class="card-stats">
-        <div class="stat">
-          <div class="s-val">${fmt(c.followers)}</div>
-          <div class="s-lbl">Followers</div>
-        </div>
-        <div class="stat">
-          <div class="s-val">${c.engagement_rate}%</div>
-          <div class="s-lbl">Eng. Rate</div>
-        </div>
-        <div class="stat">
-          <div class="s-val">${fmt(c.avg_impressions_per_post)}</div>
-          <div class="s-lbl">Avg Impr.</div>
-        </div>
+        <div class="stat"><div class="s-val">${fmt(c.followers)}</div><div class="s-lbl">Followers</div></div>
+        <div class="stat"><div class="s-val">${c.engagement_rate}%</div><div class="s-lbl">Eng. Rate</div></div>
+        <div class="stat"><div class="s-val">${fmt(c.avg_impressions_per_post)}</div><div class="s-lbl">Avg Impr.</div></div>
       </div>
-
       <div class="fit-row">
         <span class="fit-label">Fit score</span>
-        <div class="fit-track">
-          <div class="fit-fill" style="width:${c.fit_score * 10}%"></div>
-        </div>
+        <div class="fit-track"><div class="fit-fill" style="width:${c.fit_score * 10}%"></div></div>
         <span class="fit-score-val">${c.fit_score} / 10</span>
       </div>
-
       <div class="topic-chips">
         ${themes.map(t => `<span class="topic-chip ${c.topics.includes(t) ? 'match' : ''}">${t}</span>`).join('')}
       </div>
-
       <div class="fit-notes">${c.fit_notes}</div>
     `;
     grid.appendChild(card);
@@ -375,15 +415,13 @@
   });
 
   /* ── Topic coverage matrix ── */
-  const thead = document.getElementById('coverage-head');
-  const tbody = document.getElementById('coverage-body');
-
-  thead.innerHTML = `<tr>
+  document.getElementById('coverage-head').innerHTML = `<tr>
     <th style="text-align:left">Creator</th>
     ${themes.map(t => `<th><div class="theme-header">${t}</div></th>`).join('')}
     <th><div class="theme-header">Coverage</div></th>
   </tr>`;
 
+  const tbody = document.getElementById('coverage-body');
   creators.forEach(c => {
     const coverCount = themes.filter(t => c.topics.includes(t)).length;
     const tr = document.createElement('tr');
@@ -395,7 +433,6 @@
     tbody.appendChild(tr);
   });
 
-  /* Theme coverage totals row */
   const totals = document.createElement('tr');
   totals.style.borderTop = '2px solid var(--color-border)';
   totals.innerHTML = `
@@ -411,10 +448,7 @@
   /* ── Outreach priority ranking ── */
   const ranked = [...creators].sort((a, b) => b.fit_score - a.fit_score);
   const list = document.getElementById('ranking-list');
-
   ranked.forEach((c, i) => {
-    const statusClass = c.outreach_status === 'Live' ? 'status-live'
-                      : c.outreach_status === 'Contacted' ? 'status-sent' : 'status-not';
     const row = document.createElement('div');
     row.className = 'rank-row';
     row.innerHTML = `
@@ -427,7 +461,7 @@
       <div class="rank-right">
         <span class="rank-score">${c.fit_score}</span>
         <span class="rank-score-lbl">fit score</span>
-        <span class="status-badge ${statusClass}">${c.outreach_status}</span>
+        <span class="status-badge ${statusClass(c.outreach_status)}">${c.outreach_status}</span>
       </div>
     `;
     list.appendChild(row);
